@@ -13,14 +13,15 @@ class AccountTest {
 
     @Test
     public void test_account_name(){
-       Account newAccount = new Account("Irina",new BigDecimal("12546.2356"));
-
+        Account newAccount = new Account("Irina",new BigDecimal("12546.2356"));
+        String expectedName="Irina";
         String realName = newAccount.getPerson();
-      //  assertEquals(expectedName,realName);
+        assertEquals(expectedName,realName);
 
       /*
           String expectedName="Irina".toUpperCase();
           assertTrue(expectedName.equals("Irina"));
+
        */
 
 
