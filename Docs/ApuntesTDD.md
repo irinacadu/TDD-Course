@@ -2,12 +2,13 @@
 
 ## Contenido 
 1. [Información general](#informacion-general)
-2. [Ciclo de vida]
-2. [Assertions](#assertions)
-3. [Tests unitarios](#tests-unitarios)
-4. [Conceptos TDD](#conceptos-tdd)
-5. [Manejo de excepciones](#manejo-de-excepciones)
-6. [Anotaciones JUnit](#anotaciones-junit)
+2. [Ciclo de vida](#ciclo-de-vida)
+3. [Assertions](#assertions)
+4. [Tests unitarios](#tests-unitarios)
+5. [Conceptos TDD](#conceptos-tdd)
+6. [Manejo de excepciones](#manejo-de-excepciones)
+7. [Anotaciones JUnit](#anotaciones-junit)
+8. [Eventos del ciclo de vida](#eventos-del-ciclo-de-vida)
 
 
 
