@@ -2,6 +2,7 @@
 
 ## Contenido 
 1. [Información general](#informacion-general)
+2. [Ciclo de vida]
 2. [Assertions](#assertions)
 3. [Tests unitarios](#tests-unitarios)
 4. [Conceptos TDD](#conceptos-tdd)
@@ -19,6 +20,18 @@
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 - Utilizando *fail();* al principio del test vamos a provocar el error del test entero. Es un método estático de la clase Assertions.
    * Ver Ej. [Account entity test L53][account-entity-test-L53]
+
+### Ciclo de vida
+- Proceso en el cual se crea una instancia, se administra y se destruye. Lo solemos hacer con new
+- JUnit crea el ciclo de vida de la instancia.
+- Con JUnit podemos ejecutar una pieza de código espécifico en cualquier momento del ciclo de vida. Esto lo hace con los [eventos](#eventos-del-ciclo-de-vida)
+- Los métodos de una clase de test también forman parte del ciclo de vida.
+- Por cada método se crea una nueva instancia de la clase. El orden de ejecución de los métodos es aleatorio y no hay garantía de cual se va a ejecutar primero.
+- Se puede crear una instancia sola para toda la clase.
+- Se puede establecer unas normas de ordenación de los métodos de las clases de test.
+- No es una buena parte realizar ordenación de métodos dependientes de otros ya que se puede cambiar el comportamiento de los tests y no obtener los resultaos esperados.
+- Se pueden ordenar de manera visual pero no para crear dependencias.
+
 
 ### Assertions
 - Como último argumento, podemos poner a cada uno de los asserts un mensaje de error para clarificar el fallo. Si el test no falla el error no aparecerá. Si utilizamos una expresión Lambda antes del mensaje
@@ -59,7 +72,15 @@
 - **@DisplayName**: Con esta anotación se puede añadir una descripción al test.
    * Ej ver [Bank methods test L40][bank-methods-test-L40]
 - **@Disabled**: para deshabilitar un test concreto por si queremos que no se ejecute.
-   * Ej ver [Account entity test L53][account-entyty-test-L53]
+   * Ej ver [Account entity test L53][account-entity-test-L53]
+
+ ### Eventos del ciclo de vida
+- **@BeforeAll**: Se ejecuta una sola vez al principio nuestra prueba unitaria. 
+- **@BeforeEach**: Se va a ejecutar al principio de cada método. Este evento por ejemplo, puede crear una nueva instancia en cada método evitando así la dependencia.
+    * Ej. ver  [Account entity test L24][account-entity-test-L24]
+- **@AfterEach**: Se va a ejecutar al final de cada método.
+    * Ej. ver  [Account entity test L30][account-entity-test-L30]
+- **@AfterAll**: Se ejecuta una sola vez al final de nuestra prueba unitaria.
 
 
 
@@ -68,7 +89,8 @@
 [account-entity-test-L34]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L34
 [account-entity-test-L43]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L43
 [account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
-[account-entyty-test-L53]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
+[account-entity-test-L24]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L24
+[account-entity-test-L30]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L30
 [account-methods-test-L18]:https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L18
 [insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
