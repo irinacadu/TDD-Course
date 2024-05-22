@@ -61,7 +61,7 @@ class AccountMethodsTest {
                 .build();
         AccountMethods accountMethods = new AccountMethods();
         Exception exception = assertThrows(InsufficientMoneyException.class,()->{
-            accountMethods.debit(new BigDecimal(1100),newAccountReal);
+            accountMethods.debit(new BigDecimal(3000),newAccountReal);
         });
 
         String actualBalance = exception.getMessage();

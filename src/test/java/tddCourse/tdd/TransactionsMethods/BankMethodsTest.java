@@ -36,7 +36,7 @@ class BankMethodsTest {
     void bank_account_relationship_test(){
         BankMethods bankMethods = new BankMethods();
         Bank bank = new Bank();
-        bank.setName("Irina's Bank");
+        bank.setName("Bank Irina");
 
 
         Account originAccount =  Account.builder()
@@ -55,23 +55,18 @@ class BankMethodsTest {
 
 
         assertAll(
-                ()-> assertEquals("2000.12375",originAccount.getBalance().toPlainString()), //fallo
-                ()-> assertEquals("3000.12345",destinyAccount.getBalance().toPlainString()),
-                ()-> assertEquals(2, bank.getBankAccounts().size()),
-                ()-> assertEquals("Irina's Bank.", originAccount.getBankName().getName()), //fallo
+                ()-> assertEquals("2000.12375",originAccount.getBalance().toPlainString(),"El importe no es el esperado"), //fallo intencionado
+                ()-> assertEquals("3000.12345",destinyAccount.getBalance().toPlainString(),"El importe no es el esperado"),
+                ()-> assertEquals(2, bank.getBankAccounts().size(),"La cantidad de cuentas no coincide con la cantidad de cuentas que tiene el banco"),
+                ()-> assertEquals("Irina's Bank.", originAccount.getBankName().getName(),"El nombre del banco no es correcto : se esperaba 'Irina's Bank.' y se ha obtenido '" + destinyAccount.getBankName().getName() + "'."), //fallo intencionado
                 ()-> assertEquals("Andrés", bank.getBankAccounts().stream()
                         .filter(account->account.getPerson().equals("Andrés"))
                         .findFirst()
                         .get()
-                        .getPerson()),
+                        .getPerson(),"No existe ningún cliente con ese nombre"),
                 ()-> assertTrue(bank.getBankAccounts().stream()
-                        .anyMatch(account->account.getPerson().equals("Andrés")))
+                        .anyMatch(account->account.getPerson().equals("Andrés")),"No existe ningún cliente con ese nombre")
                 );
-
-
-
-
-
 
 
     }

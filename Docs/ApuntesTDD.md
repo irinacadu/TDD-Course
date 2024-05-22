@@ -19,6 +19,8 @@
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 
 ### Assertions
+- Como último argumento, podemos poner a cada uno de los asserts un mensaje de error para clarificar el fallo. Si el test no falla el error no aparecerá.
+  * Ej. ver [Bank methods test L57][bank-methods-test-L57]
 - **assertEquals**: compara por referencia y no por valor a no ser que sobreescribamos el método "*Equals*" de la Entidad que estamos testeando. 
    * Ej. ver [Account entity L25][account-entity-L25].
 - **assertNotEquals**: funcionaigual que el assertEquals pero comprobando que las dos instancias no sean iguales.
@@ -31,12 +33,13 @@
    * Ej. ver [Account methods test L18][account-methods-test-L18].
 - [**assertThrows**](#manejo-de-excepciones)
 - **assertAll**: Crea una agrupación de asserts. Cada test fallido se mostrará en consola pero el test no se parará y podremos ver los resultados de todas las comprobaciones agrupadas.
-   * Ej. ver [Bank methods test L]
+   * Ej. ver [Bank methods test L57][bank-methods-test-L57]
 
 
 
 ### Tests unitarios 
 - Tenemos que tener en cuenta que por cada tests se va a crear una instancia nueva es decir, el valor que utilicemos en el test solo funcionará para ese test.
+- Los tests unitarios prueban, solamente, si un método concreto funciona pero no comprueba si es compatible con todas las demás.
 
 ### Conceptos TDD
 - Primero se crean las pruebas y luego se crea el código.
@@ -60,3 +63,4 @@
 [account-methods-test-L18]:https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L18
 [insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
+[bank-methods-test-L57]:https://github.com/irinacadu/TDD-Course/blob/ebbb87b0c61c28ce568c35ed125fa9954f49c9cb/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L57
