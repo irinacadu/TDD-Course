@@ -3,12 +3,15 @@ package tddCourse.tdd.TransactionsMethods;
 import org.junit.jupiter.api.Test;
 import tddCourse.tdd.Entities.Account;
 import tddCourse.tdd.Entities.Bank;
+import tddCourse.tdd.Eums.ErrorEnum;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankMethodsTest {
+
+    ErrorEnum errorEnum;
 
     @Test
     void transfer_money_accounts_test(){
@@ -55,17 +58,17 @@ class BankMethodsTest {
 
 
         assertAll(
-                ()-> assertEquals("2000.12375",originAccount.getBalance().toPlainString(),"El importe no es el esperado"), //fallo intencionado
-                ()-> assertEquals("3000.12345",destinyAccount.getBalance().toPlainString(),"El importe no es el esperado"),
-                ()-> assertEquals(2, bank.getBankAccounts().size(),"La cantidad de cuentas no coincide con la cantidad de cuentas que tiene el banco"),
-                ()-> assertEquals("Irina's Bank.", originAccount.getBankName().getName(),"El nombre del banco no es correcto : se esperaba 'Irina's Bank.' y se ha obtenido '" + destinyAccount.getBankName().getName() + "'."), //fallo intencionado
+                ()-> assertEquals("2000.12375",originAccount.getBalance().toPlainString(),()->ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage()), //fallo intencionado
+                ()-> assertEquals("3000.12345",destinyAccount.getBalance().toPlainString(), ()-> ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage()),
+                ()-> assertEquals(2, bank.getBankAccounts().size(),()-> ErrorEnum.CANTIDAD_DE_CUENTAS_ERRONEA.getErrorMessage()),
+                ()-> assertEquals("Irina's Bank.", originAccount.getBankName().getName(),()-> ErrorEnum.NOMBRE_CUENTA_ERRONEO.getErrorMessage()+ ". Se esperaba 'Irina's Bank.' y se ha obtenido '" + destinyAccount.getBankName().getName() + "'."), //fallo intencionado
                 ()-> assertEquals("Andrés", bank.getBankAccounts().stream()
                         .filter(account->account.getPerson().equals("Andrés"))
                         .findFirst()
                         .get()
-                        .getPerson(),"No existe ningún cliente con ese nombre"),
+                        .getPerson(),()-> ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage()),
                 ()-> assertTrue(bank.getBankAccounts().stream()
-                        .anyMatch(account->account.getPerson().equals("Andrés")),"No existe ningún cliente con ese nombre")
+                        .anyMatch(account->account.getPerson().equals("Andrés")),()-> ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage())
                 );
 
 

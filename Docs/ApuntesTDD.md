@@ -19,8 +19,9 @@
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 
 ### Assertions
-- Como último argumento, podemos poner a cada uno de los asserts un mensaje de error para clarificar el fallo. Si el test no falla el error no aparecerá.
-  * Ej. ver [Bank methods test L57][bank-methods-test-L57]
+- Como último argumento, podemos poner a cada uno de los asserts un mensaje de error para clarificar el fallo. Si el test no falla el error no aparecerá. Si utilizamos una expresión Lambda antes del mensaje
+  *()-> "cuerpo del mensaje"* en vez de pasar la instancia del objeto String se instanciará , solo, si salta el error. Esto mejora la eficiencia.
+   * Ej. ver [Bank methods test L57][bank-methods-test-L57]
 - **assertEquals**: compara por referencia y no por valor a no ser que sobreescribamos el método "*Equals*" de la Entidad que estamos testeando. 
    * Ej. ver [Account entity L25][account-entity-L25].
 - **assertNotEquals**: funcionaigual que el assertEquals pero comprobando que las dos instancias no sean iguales.
