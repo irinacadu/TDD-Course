@@ -17,15 +17,17 @@
 - El tipo *BigDecimal* es inmutable esto quiere decir que cualquier operación que se realice sobre un objeto *BigDecimal* devolverá un nuevo objeto del mismo tipo en lugar de modificar el existente.
 - El tipo BigDecimal se compara con *compareTo()*
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
+- Utilizando *fail();* al principio del test vamos a provocar el error del test entero. Es un método estático de la clase Assertions.
+   * Ver Ej. [Account entity test L53][account-entity-test-L53]
 
 ### Assertions
 - Como último argumento, podemos poner a cada uno de los asserts un mensaje de error para clarificar el fallo. Si el test no falla el error no aparecerá. Si utilizamos una expresión Lambda antes del mensaje
   *()-> "cuerpo del mensaje"* en vez de pasar la instancia del objeto String se instanciará , solo, si salta el error. Esto mejora la eficiencia.
    * Ej. ver [Bank methods test L57][bank-methods-test-L57]
 - **assertEquals**: compara por referencia y no por valor a no ser que sobreescribamos el método "*Equals*" de la Entidad que estamos testeando. 
-   * Ej. ver [Account entity L25][account-entity-L25].
+   * Ej. ver [Account entity testL25][account-entity-L25].
 - **assertNotEquals**: funcionaigual que el assertEquals pero comprobando que las dos instancias no sean iguales.
-   * Ej. ver [Account entity L43][account-entity-test-L43]
+   * Ej. ver [Account entity test L43][account-entity-test-L43]
 - **assertTrue**: compara por valor literal. Si por ejemplo, comparamos dos cadenas iguales pero una de ellas está utilizando el *toUppercase()* ese test no será válido. 
    * Ej. ver [Account entity test L22][account-entity-test-L22].
 - **assertFalse**: compara por valor literal.
@@ -55,7 +57,9 @@
 ### Anotaciones JUnit
 - **@Test**: si no se utiliza esta anotación el programa no entenderá que la función es un test.
 - **@DisplayName**: Con esta anotación se puede añadir una descripción al test.
-   * Ej ver [Bank methods test L39][bank-methods-test-L39]
+   * Ej ver [Bank methods test L40][bank-methods-test-L40]
+- **@Disabled**: para deshabilitar un test concreto por si queremos que no se ejecute.
+   * Ej ver [Account entity test L53][account-entyty-test-L53]
 
 
 
@@ -63,8 +67,10 @@
 [account-entity-test-L22]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L22
 [account-entity-test-L34]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L34
 [account-entity-test-L43]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L43
+[account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
+[account-entyty-test-L53]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
 [account-methods-test-L18]:https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L18
 [insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
 [bank-methods-test-L57]:https://github.com/irinacadu/TDD-Course/blob/ebbb87b0c61c28ce568c35ed125fa9954f49c9cb/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L57
-[bank-methods-test-L39]:https://github.com/irinacadu/TDD-Course/blob/a60ab82f17dad03b56a07f427d87f958e4ee95d8/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L39
+[bank-methods-test-L40]:https://github.com/irinacadu/TDD-Course/blob/a60ab82f17dad03b56a07f427d87f958e4ee95d8/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L40

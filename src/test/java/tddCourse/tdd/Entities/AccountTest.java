@@ -1,5 +1,6 @@
 package tddCourse.tdd.Entities;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,7 +50,9 @@ class AccountTest {
 
     @Test
     @DisplayName("Comprobar que las dos cuentas son la misma")
+    @Disabled
     void account_reference(){
+        fail();
         Account newAccountReal = Account.builder()
                                     .person("John Doe")
                                     .balance(new BigDecimal("9000.12345"))
