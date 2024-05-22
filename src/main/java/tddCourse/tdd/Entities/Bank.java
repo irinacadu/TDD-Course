@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 public class Bank {
     private String name;
-    private Account originAccount;
-    private Account destinyAccount;
     BigDecimal balance;
+    List <Account> bankAccounts = new ArrayList<>();
 }

@@ -19,7 +19,10 @@ class AccountMethodsTest {
     @Test
 
     void debit_account_test(){
-        Account newAccountReal = new Account("John Doe",new BigDecimal("1000.12345"));
+        Account newAccountReal =  Account.builder()
+                .person("John Doe")
+                .balance(new BigDecimal("2500.12345"))
+                .build();
         AccountMethods accountMethods = new AccountMethods();
         accountMethods.debit(new BigDecimal(100),newAccountReal);
 
@@ -30,7 +33,10 @@ class AccountMethodsTest {
 
     @Test
     void credit_account_test(){
-        Account newAccountReal = new Account("John Doe",new BigDecimal("1000.12345"));
+        Account newAccountReal =  Account.builder()
+                .person("John Doe")
+                .balance(new BigDecimal("2500.12345"))
+                .build();
         AccountMethods accountMethods = new AccountMethods();
         accountMethods.credit(new BigDecimal(100),newAccountReal);
 
@@ -49,7 +55,10 @@ class AccountMethodsTest {
      */
     @Test
     void insufficient_money_account_exception(){
-        Account newAccountReal = new Account("John Doe",new BigDecimal("1000.12345"));
+        Account newAccountReal =  Account.builder()
+                .person("John Doe")
+                .balance(new BigDecimal("2500.12345"))
+                .build();
         AccountMethods accountMethods = new AccountMethods();
         Exception exception = assertThrows(InsufficientMoneyException.class,()->{
             accountMethods.debit(new BigDecimal(1100),newAccountReal);

@@ -9,9 +9,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class Account {
     private String person;
     private BigDecimal balance;
+    private Bank bankName;
 
     /**
      * Author: Irina Casas

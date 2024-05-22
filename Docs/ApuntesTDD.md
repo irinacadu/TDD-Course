@@ -28,8 +28,10 @@
 - **assertFalse**: compara por valor literal.
    * Ej. ver [Account entity test L34][account-entity-test-L34].
 - **assertNotNull**: comprueba que el valor no está vacío.
-   * Ej. ver [Account methods test L][account-methods-test-L18].
+   * Ej. ver [Account methods test L18][account-methods-test-L18].
 - [**assertThrows**](#manejo-de-excepciones)
+- **assertAll**: Crea una agrupación de asserts. Cada test fallido se mostrará en consola pero el test no se parará y podremos ver los resultados de todas las comprobaciones agrupadas.
+   * Ej. ver [Bank methods test L]
 
 
 
@@ -47,7 +49,7 @@
    * Ej. Ver [Account methods test L41][account-methods-test-L41];
     
 ### Anotaciones JUnit
-
+- **@Test**: si no se utiliza esta anotación el programa no entenderá que la función es un test.
 
 
 
