@@ -54,6 +54,8 @@
     
 ### Anotaciones JUnit
 - **@Test**: si no se utiliza esta anotación el programa no entenderá que la función es un test.
+- **@DisplayName**: Con esta anotación se puede añadir una descripción al test.
+   * Ej ver [Bank methods test L39][bank-methods-test-L39]
 
 
 
@@ -65,3 +67,4 @@
 [insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
 [bank-methods-test-L57]:https://github.com/irinacadu/TDD-Course/blob/ebbb87b0c61c28ce568c35ed125fa9954f49c9cb/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L57
+[bank-methods-test-L39]:https://github.com/irinacadu/TDD-Course/blob/a60ab82f17dad03b56a07f427d87f958e4ee95d8/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L39

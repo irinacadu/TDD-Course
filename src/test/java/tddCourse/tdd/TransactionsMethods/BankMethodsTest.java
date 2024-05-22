@@ -1,5 +1,6 @@
 package tddCourse.tdd.TransactionsMethods;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tddCourse.tdd.Entities.Account;
 import tddCourse.tdd.Entities.Bank;
@@ -11,9 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankMethodsTest {
 
-    ErrorEnum errorEnum;
-
     @Test
+    @DisplayName("Comprobar que las transferencias entre cuentas se ejecutan.")
     void transfer_money_accounts_test(){
         Account originAccount =  Account.builder()
                                     .person("John Doe")
@@ -29,13 +29,15 @@ class BankMethodsTest {
         bank.setName("Irina's Bank");
 
         bankMethods.transferMoney(originAccount,destinyAccount, new BigDecimal(500));
-        assertEquals("2000.12345",originAccount.getBalance().toPlainString() );
-        assertEquals("3000.12345",destinyAccount.getBalance().toPlainString() );
+
+        assertEquals("2000.12345",originAccount.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage() );
+        assertEquals("3000.12345",destinyAccount.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage() );
 
     }
 
 
     @Test
+    @DisplayName("Comprobar relación entre banco y cliente")
     void bank_account_relationship_test(){
         BankMethods bankMethods = new BankMethods();
         Bank bank = new Bank();

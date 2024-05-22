@@ -1,7 +1,9 @@
 package tddCourse.tdd.TransactionsMethods;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tddCourse.tdd.Entities.Account;
+import tddCourse.tdd.Eums.ErrorEnum;
 import tddCourse.tdd.Exceptions.InsufficientMoneyException;
 
 import java.math.BigDecimal;
@@ -27,8 +29,8 @@ class AccountMethodsTest {
         accountMethods.debit(new BigDecimal(100),newAccountReal);
 
         assertNotNull(newAccountReal.getBalance());
-        assertEquals(900, newAccountReal.getBalance().intValue());
-        assertEquals("900.12345", newAccountReal.getBalance().toPlainString());
+        assertEquals(900, newAccountReal.getBalance().intValue(), ErrorEnum.CUENTA_VACIA.getErrorMessage());
+        assertEquals("900.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
     }
 
     @Test
@@ -40,9 +42,9 @@ class AccountMethodsTest {
         AccountMethods accountMethods = new AccountMethods();
         accountMethods.credit(new BigDecimal(100),newAccountReal);
 
-        assertNotNull(newAccountReal.getBalance());
-        assertEquals(1100, newAccountReal.getBalance().intValue());// hasta que el método no esté implementado esta comprobación va a fallar
-        assertEquals("1100.12345", newAccountReal.getBalance().toPlainString());
+        assertNotNull(newAccountReal.getBalance(),ErrorEnum.CUENTA_VACIA.getErrorMessage());
+        assertEquals(1100, newAccountReal.getBalance().intValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());// hasta que el método no esté implementado esta comprobación va a fallar
+        assertEquals("1100.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
     }
 
     /**
@@ -54,6 +56,7 @@ class AccountMethodsTest {
      * método estamos utilizando InsufficientMoneyException
      */
     @Test
+    @DisplayName("Comprobar que salta la excepción si hay saldo insuficiente")
     void insufficient_money_account_exception(){
         Account newAccountReal =  Account.builder()
                 .person("John Doe")
