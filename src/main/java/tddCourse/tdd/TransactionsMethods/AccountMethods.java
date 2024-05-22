@@ -1,6 +1,7 @@
-package tddCourse.tdd.AccountMethods;
+package tddCourse.tdd.TransactionsMethods;
 
 import tddCourse.tdd.Entities.Account;
+import tddCourse.tdd.Exceptions.InsufficientMoneyException;
 
 import java.math.BigDecimal;
 
@@ -12,10 +13,13 @@ public class AccountMethods {
      * @param account
      * Este método resta dinero a la cuenta
      */
-    public void debit(BigDecimal debit,Account  account ){
+    public void debit(BigDecimal debit,Account account ){
         BigDecimal remainingBalance = account.getBalance().subtract(debit);
-        account.setBalance(remainingBalance);
+        if(remainingBalance.compareTo(BigDecimal.ZERO) < 0) {
+            throw new InsufficientMoneyException("Dinero insuficiente");
+        }
 
+        account.setBalance(remainingBalance);
     }
 
     /**
@@ -27,6 +31,6 @@ public class AccountMethods {
     public void credit(BigDecimal credit , Account account){
         BigDecimal remainingBalance = account.getBalance().add(credit);
         account.setBalance(remainingBalance);
-
     }
+
 }

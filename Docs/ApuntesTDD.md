@@ -6,6 +6,7 @@
 3. [Tests unitarios](#tests-unitarios)
 4. [Conceptos TDD](#conceptos-tdd)
 5. [Manejo de excepciones](#manejo-de-excepciones)
+6. [Anotaciones JUnit](#anotaciones-junit)
 
 
 
@@ -14,6 +15,8 @@
 - En testing se suelen utilizar los guiones bajos para separar las palabras de las nomenclaturas de los métodos. 
   * Ej. *test_account_name()*.
 - El tipo *BigDecimal* es inmutable esto quiere decir que cualquier operación que se realice sobre un objeto *BigDecimal* devolverá un nuevo objeto del mismo tipo en lugar de modificar el existente.
+- El tipo BigDecimal se compara con *compareTo()*
+- Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 
 ### Assertions
 - **assertEquals**: compara por referencia y no por valor a no ser que sobreescribamos el método "*Equals*" de la Entidad que estamos testeando. 
@@ -26,6 +29,7 @@
    * Ej. ver [Account entity test L34][account-entity-test-L34].
 - **assertNotNull**: comprueba que el valor no está vacío.
    * Ej. ver [Account methods test L][account-methods-test-L18].
+- [**assertThrows**](#manejo-de-excepciones)
 
 
 
@@ -37,10 +41,12 @@
 
 ### Manejo de excepciones
 - Para excepciones, es común definir los constructores manualmente para poder enviar mensajes a la superclase.
-   * Ej. Ver 
-
-
-
+   * Ej. Ver [Insufficient money exception L12][insufficient-money-exception-L12].
+- **assertThrows**: se utiliza para manejar excepciones. Llamada a la excepción:
+    <code>assertThrows (NombreClaseExcpción.class,()->{resto de código que queremos testear})</code>
+   * Ej. Ver [Account methods test L41][account-methods-test-L41];
+    
+### Anotaciones JUnit
 
 
 
@@ -50,3 +56,5 @@
 [account-entity-test-L34]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L34
 [account-entity-test-L43]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L43
 [account-methods-test-L18]:https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L18
+[insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
+[account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
