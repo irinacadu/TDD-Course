@@ -2,11 +2,13 @@ package tddCourse.tdd.TransactionsMethods;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.*;
 import tddCourse.tdd.Entities.Account;
 import tddCourse.tdd.Entities.Bank;
 import tddCourse.tdd.Eums.ErrorEnum;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,7 +74,9 @@ class BankMethodsTest {
                 ()-> assertTrue(bank.getBankAccounts().stream()
                         .anyMatch(account->account.getPerson().equals("Andrés")),()-> ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage())
                 );
-
-
     }
+
+
+
+
 }

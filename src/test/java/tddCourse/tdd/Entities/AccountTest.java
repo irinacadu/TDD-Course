@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AccountTest {
 Account account;
 
@@ -22,7 +23,7 @@ Account account;
     void init_test_method(){
         account =  Account.builder()
                 .person("Irina")
-                .balance(new BigDecimal("12546.2356"))
+                .balance(new BigDecimal("1000.12345"))
                 .build();
         System.out.println("Iniciando el método");
     }
@@ -31,6 +32,18 @@ Account account;
     void end_test_method(){
         System.out.println("Finalizando el método");
     }
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Inicializando el test");
+
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("Finalizando el test");
+    }
+
     @Test
     @DisplayName("Comprobar que el nombre del cliente es correcto")
     public void test_account_name(){
@@ -59,16 +72,16 @@ Account account;
 
     @Test
     @DisplayName("Comprobar que las dos cuentas son la misma")
-    @Disabled
+   // @Disabled
     void account_reference(){
-        fail();
+       // fail();
         account = Account.builder()
                                     .person("John Doe")
-                                    .balance(new BigDecimal("9000.12345"))
+                                    .balance(new BigDecimal("1000.12345"))
                                     .build();
         Account newAccountExpected = Account.builder()
                                         .person("John Doe")
-                                        .balance(new BigDecimal("9000.12345"))
+                                        .balance(new BigDecimal("1000.12345"))
                                         .build();
 
 
