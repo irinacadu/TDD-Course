@@ -13,6 +13,65 @@ import static org.junit.jupiter.api.Assumptions.*;
 class AccountTest {
 Account account;
 
+    @Test
+    @DisplayName("Comprobar que el nombre del cliente es correcto")
+    public void test_account_name(){
+
+        String expectedName="Irina";
+        String realName = account.getPerson();
+        assertEquals(expectedName,realName, ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage());
+
+      /*
+          String expectedName="Irina".toUpperCase();
+          assertTrue(expectedName.equals("Irina"));
+
+       */
+
+    }
+
+    @Test
+    @DisplayName("Comprobar que los importes en la cuenta coincide")
+    void test_account_balance(){
+
+        assertEquals(1000.12345,account.getBalance().doubleValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());//Con el doubleValue() estamos convirtiendo el BigDecimal a Double.
+        assertFalse(account.getBalance().compareTo(BigDecimal.ZERO)<0,ErrorEnum.SALDO_INSUFICIENTE.getErrorMessage());// El saldo es mayor que 0
+     // assertFalse(newAccount.getBalance().compareTo(BigDecimal.ZERO)>0); va a fallar porque es es "true" que el saldo es mayor que 0
+    }
+
+    @Test
+    @DisplayName("Comprobar que las dos cuentas son la misma")
+   // @Disabled
+    void account_reference(){
+       // fail();
+        account = Account.builder()
+                                    .person("John Doe")
+                                    .balance(new BigDecimal("1000.12345"))
+                                    .build();
+        Account newAccountExpected = Account.builder()
+                                        .person("John Doe")
+                                        .balance(new BigDecimal("1000.12345"))
+                                        .build();
+
+
+       // assertNotEquals(newAccountExpected,newAccountReal);
+        assertEquals(newAccountExpected,account,ErrorEnum.CUENTA_NO_COINCIDE.getErrorMessage());
+    }
+
+    @Test
+    @DisplayName("Comprobar que los importes en la cuenta coinciden // DEV")
+    void test_account_balance_dev_env(){
+
+        boolean isDevEnvironment = "dev".equals(System.getProperty("ENV"));
+        //assumeTrue(isDevEnvironment);
+
+        assumingThat(isDevEnvironment,()->{
+            assertEquals(1000.12345,account.getBalance().doubleValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());//Con el doubleValue() estamos convirtiendo el BigDecimal a Double.
+            assertFalse(account.getBalance().compareTo(BigDecimal.ZERO)<0,ErrorEnum.SALDO_INSUFICIENTE.getErrorMessage());// El saldo es mayor que 0
+            // assertFalse(newAccount.getBalance().compareTo(BigDecimal.ZERO)>0); va a fallar porque es es "true" que el saldo es mayor que 0
+        });
+
+    }
+
     /**
      * Con este método "globalizamos" la cuenta de manera que podemos evitar la sobrecarga de código en los demás métodos.
      * @BeforeEach va a crear una nueva instancia por cada función de manera que, aunque estemos "reutilizando", evitará que
@@ -42,52 +101,4 @@ Account account;
     static void afterAll() {
         System.out.println("Finalizando el test");
     }
-
-    @Test
-    @DisplayName("Comprobar que el nombre del cliente es correcto")
-    public void test_account_name(){
-
-
-        String expectedName="Irina";
-        String realName = account.getPerson();
-        assertEquals(expectedName,realName, ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage());
-
-      /*
-          String expectedName="Irina".toUpperCase();
-          assertTrue(expectedName.equals("Irina"));
-
-       */
-
-    }
-
-    @Test
-    @DisplayName("Comprobar que los importes en la cuenta coincide")
-    void test_account_balance(){
-
-        boolean isDevEnvironment = "DEV".equals(System.getProperty("ENV"));
-
-        assertEquals(1000.12345,account.getBalance().doubleValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());//Con el doubleValue() estamos convirtiendo el BigDecimal a Double.
-        assertFalse(account.getBalance().compareTo(BigDecimal.ZERO)<0,ErrorEnum.SALDO_INSUFICIENTE.getErrorMessage());// El saldo es mayor que 0
-     // assertFalse(newAccount.getBalance().compareTo(BigDecimal.ZERO)>0); va a fallar porque es es "true" que el saldo es mayor que 0
-    }
-
-    @Test
-    @DisplayName("Comprobar que las dos cuentas son la misma")
-   // @Disabled
-    void account_reference(){
-       // fail();
-        account = Account.builder()
-                                    .person("John Doe")
-                                    .balance(new BigDecimal("1000.12345"))
-                                    .build();
-        Account newAccountExpected = Account.builder()
-                                        .person("John Doe")
-                                        .balance(new BigDecimal("1000.12345"))
-                                        .build();
-
-
-       // assertNotEquals(newAccountExpected,newAccountReal);
-        assertEquals(newAccountExpected,account,ErrorEnum.CUENTA_NO_COINCIDE.getErrorMessage());
-    }
-
 }

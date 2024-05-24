@@ -68,7 +68,7 @@
 - Para excepciones, es común definir los constructores manualmente para poder enviar mensajes a la superclase.
    * Ej. Ver [Insufficient money exception L12][insufficient-money-exception-L12].
 - **assertThrows**: se utiliza para manejar excepciones. Llamada a la excepción:
-    <code>assertThrows (NombreClaseExcpción.class,()->{resto de código que queremos testear})</code>
+    <code>assertThrows (NombreClaseExcepción.class,()->{resto de código que queremos testear})</code>
    * Ej. Ver [Account methods test L41][account-methods-test-L41];
     
 ### Anotaciones JUnit
@@ -80,15 +80,15 @@
 
  ### Eventos del ciclo de vida
 - **@BeforeAll**: Se ejecuta una sola vez al principio nuestra prueba unitaria. Crea un método estático el cual pertenece a la clase y no a la instancia. Sin embargo, si no hay intancia va a ignorar este método y no lo va a ejecutar.
-   * Ej. ver  [Account entity test L36][account-entity-test-L36]
+   * Ej. ver  [Account entity test L94][account-entity-test-L94]
 - **@BeforeEach**: Se va a ejecutar al principio de cada método. Este evento por ejemplo, puede crear una nueva instancia en cada método evitando así la dependencia.
-   * Ej. ver  [Account entity test L24][account-entity-test-L24]
+   * Ej. ver  [Account entity test 80][account-entity-test-L80]
 - **@AfterEach**: Se va a ejecutar al final de cada método.
-   * Ej. ver  [Account entity test L30][account-entity-test-L30]
+   * Ej. ver  [Account entity test L90][account-entity-test-L30]
 - **@AfterAll**: Se ejecuta una sola vez al final de nuestra prueba unitaria.También crea un método estático
-   * Ej. ver  [Account entity test L42][account-entity-test-L42]
+   * Ej. ver  [Account entity test L100][account-entity-test-L42]
 - **@TestInstance**: Podemos establecer como queremos que se ejecute el ciclo de vida del test ya sea por método o por instancia. Esta última no se recomienda ya que, como decíamos, no es buena práctica utilizar una instancia global para todo el test.
-   * Ej. ver  [Account entity test L13][account-entity-test-L13]
+   * Ej. ver  [Account entity test L12][account-entity-test-L12]
 
 ### Condicionales
 - Se pueden condicionar las pruebas para que se ejecuten según el escenario dado como por ejemplo el tipo de SO o la versión de java
@@ -104,20 +104,24 @@
 
 ### Asunciones
 - Se aplican a un código, de forma programática, dentro de un método
-- 
-
+- Todo lo que está debajo del **assumeTrue** o **assumeFalse**   se ejecuta o no se ejecuta si se cumple la condición booleanda especificada pero no fallará.
+   * Ej. Ver [Account entity test L97] [account-entity-test-L77]
+- **assumingThat** se pasa un valor si se cumple se pasa la expresión lambda que contendrá el código que queremos que se ejecute si la asunción es cierta.
+  * Ej. Ver [Account entity test L98] [account-entity-test-L98]
 
 [account-entity-L25]: https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/main/java/tddCourse/tdd/Entities/Account.java#L25
 [account-entity-test-L22]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L22
 [account-entity-test-L34]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L34
 [account-entity-test-L43]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L43
 [account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
-[account-entity-test-L24]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L24
-[account-entity-test-L30]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L30
-[account-entity-test-L36]: https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L36
-[account-entity-test-L42]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L42
-[account-entity-test-L13]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L13
+[account-entity-test-L80]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L80
+[account-entity-test-L90]:https://github.com/irinacadu/TDD-Course/blob/463ad1da5012fe0478193b52216263abecec1d53/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L90
+[account-entity-test-L94]: https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L94
+[account-entity-test-L100]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L100
+[account-entity-test-L13]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L12
 [account-methods-test-L18]:https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L18
+[account-entity-test-L77]:https://github.com/irinacadu/TDD-Course/blob/64429de3712dcc19faa8b3bc0c74c9b13097bb5a/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L97
+[account-entity-test-L98]:https://github.com/irinacadu/TDD-Course/blob/64429de3712dcc19faa8b3bc0c74c9b13097bb5a/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L98
 [insufficient-money-exception-L12]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/Exceptions/InsufficientMoneyException.java#L12
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
 [bank-methods-test-L57]:https://github.com/irinacadu/TDD-Course/blob/ebbb87b0c61c28ce568c35ed125fa9954f49c9cb/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L57
