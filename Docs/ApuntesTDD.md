@@ -9,6 +9,8 @@
 6. [Manejo de excepciones](#manejo-de-excepciones)
 7. [Anotaciones JUnit](#anotaciones-junit)
 8. [Eventos del ciclo de vida](#eventos-del-ciclo-de-vida)
+9. [Condicionales](#condicionales)
+10. [Asunciones](#asunciones)
 
 
 
@@ -21,6 +23,8 @@
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 - Utilizando *fail();* al principio del test vamos a provocar el error del test entero. Es un método estático de la clase Assertions.
    * Ver Ej. [Account entity test L53][account-entity-test-L53]
+- Para poder testear en entornos concretos [Conditional examples test L105][conditional-examples-test-L105]
+
 
 ### Ciclo de vida
 - Proceso en el cual se crea una instancia, se administra y se destruye. Lo solemos hacer con new
@@ -86,12 +90,22 @@
 - **@TestInstance**: Podemos establecer como queremos que se ejecute el ciclo de vida del test ya sea por método o por instancia. Esta última no se recomienda ya que, como decíamos, no es buena práctica utilizar una instancia global para todo el test.
    * Ej. ver  [Account entity test L13][account-entity-test-L13]
 
-### Pruebas unitarias condicionales
+### Condicionales
 - Se pueden condicionar las pruebas para que se ejecuten según el escenario dado como por ejemplo el tipo de SO o la versión de java
 - **@EnabledOn...**: Habilita la prueba solo en la condición establecida en la anotación.
-  * Ej. ver  [Bank methods test L79][bank-methods-test-L79]
+  * Ej. ver  [Conditional examples test L15][conditional-examples-test-L15]
 - **@DisabledOn...**: Deshabilita la prueba solo en la condición establecida en la anotación
-  *  * Ej. ver [Bank methods test L93][bank-methods-test-L93]
+- **@DisabledOn...**: Deshabilita la prueba solo en la condición establecida en la anotación
+  * Ej. ver [Conditional examples test L29][conditional-examples-test-L29]
+- **@EnabledIfSystemProperties**: Test que se ejecutará solo si la condición relacionada con las propiedades del sistema entre paréntesis se cumple. El *"matches"* de esta anotación soporta expresiones regulares.
+  * Ej. ver [Conditional examples test L58][conditional-examples-test-L58]
+- **@EnabledIfEnvironmentVariables**: Test que se ejecutará solo si la condición relacionada con las variables del sistema entre paréntesis se cumple. El *"matches"* de esta anotación soporta expresiones regulares.
+  * Ej. ver [Conditional examples test L58][conditional-examples-test-L58]
+
+### Asunciones
+- Se aplican a un código, de forma programática, dentro de un método
+- 
+
 
 [account-entity-L25]: https://github.com/irinacadu/TDD-Course/blob/1c67331cc3952452c4dc9148d7a75f9626febf2e/src/main/java/tddCourse/tdd/Entities/Account.java#L25
 [account-entity-test-L22]: https://github.com/irinacadu/TDD-Course/blob/c81aa88ec3b839221f58b29aa03bd766f36b108f/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L22
@@ -108,5 +122,8 @@
 [account-methods-test-L41]:https://github.com/irinacadu/TDD-Course/blob/3189652547adebbae4f378dd92a15d479a266113/src/test/java/tddCourse/tdd/AccountMethods/AccountMethodsTest.java#L41
 [bank-methods-test-L57]:https://github.com/irinacadu/TDD-Course/blob/ebbb87b0c61c28ce568c35ed125fa9954f49c9cb/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L57
 [bank-methods-test-L40]:https://github.com/irinacadu/TDD-Course/blob/a60ab82f17dad03b56a07f427d87f958e4ee95d8/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L40
-[bank-methods-test-L79]: https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L79
-[bank-methods-test-L93]:https://github.com/irinacadu/TDD-Course/blob/7ed3ffc7cd1db2a334db6e14e791556e75c2558e/src/test/java/tddCourse/tdd/TransactionsMethods/BankMethodsTest.java#L93
+[conditional-examples-test-L15]: https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L15
+[conditional-examples-test-L29]:https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L29
+[conditional-examples-test-L58]:https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L58
+[conditional-examples-test-L66]:https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L66
+[conditional-examples-test-L105]: https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L105

@@ -7,8 +7,7 @@ import tddCourse.tdd.Eums.ErrorEnum;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-
+import static org.junit.jupiter.api.Assumptions.*;
 @SpringBootTest
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AccountTest {
@@ -64,6 +63,8 @@ Account account;
     @Test
     @DisplayName("Comprobar que los importes en la cuenta coincide")
     void test_account_balance(){
+
+        boolean isDevEnvironment = "DEV".equals(System.getProperty("ENV"));
 
         assertEquals(1000.12345,account.getBalance().doubleValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());//Con el doubleValue() estamos convirtiendo el BigDecimal a Double.
         assertFalse(account.getBalance().compareTo(BigDecimal.ZERO)<0,ErrorEnum.SALDO_INSUFICIENTE.getErrorMessage());// El saldo es mayor que 0
