@@ -26,11 +26,11 @@ class AccountMethodsTest {
                 .balance(new BigDecimal("2500.12345"))
                 .build();
         AccountMethods accountMethods = new AccountMethods();
-        accountMethods.debit(new BigDecimal(100),newAccountReal);
+        accountMethods.debit(new BigDecimal(500),newAccountReal);
 
         assertNotNull(newAccountReal.getBalance());
-        assertEquals(900, newAccountReal.getBalance().intValue(), ErrorEnum.CUENTA_VACIA.getErrorMessage());
-        assertEquals("900.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
+        assertEquals(2000, newAccountReal.getBalance().intValue(), ErrorEnum.CUENTA_VACIA.getErrorMessage());
+        assertEquals("2000.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
     }
 
     @Test
@@ -40,11 +40,11 @@ class AccountMethodsTest {
                 .balance(new BigDecimal("2500.12345"))
                 .build();
         AccountMethods accountMethods = new AccountMethods();
-        accountMethods.credit(new BigDecimal(100),newAccountReal);
+        accountMethods.credit(new BigDecimal(500),newAccountReal);
 
         assertNotNull(newAccountReal.getBalance(),ErrorEnum.CUENTA_VACIA.getErrorMessage());
-        assertEquals(1100, newAccountReal.getBalance().intValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());// hasta que el método no esté implementado esta comprobación va a fallar
-        assertEquals("1100.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
+        assertEquals(3000, newAccountReal.getBalance().intValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());// hasta que el método no esté implementado esta comprobación va a fallar
+        assertEquals("3000.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
     }
 
     /**
