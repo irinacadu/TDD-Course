@@ -1,5 +1,6 @@
 package tddCourse.tdd.Entities;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import tddCourse.tdd.Eums.ErrorEnum;
@@ -16,6 +17,7 @@ Account account;
     @RepeatedTest(value = 5, name ="Repetición numero {currentRepetition} de {totalRepetitions}")
     @DisplayName("Comprobar que el nombre del cliente es correcto")
     public void test_account_name(){
+
 
         String expectedName="Irina";
         String realName = account.getPerson();
@@ -78,7 +80,9 @@ Account account;
      * todos los métodos dependan de una sola instancia.
      */
     @BeforeEach
-    void init_test_method(){
+    void init_test_method(@NotNull TestInfo testInfo, TestReporter testReporter){
+        System.out.println("ejecutando: "+testInfo.getDisplayName()+" "+testInfo.getTestMethod().orElse(null).getName());
+
         account =  Account.builder()
                 .person("Irina")
                 .balance(new BigDecimal("1000.12345"))
