@@ -1,4 +1,4 @@
-package tddCourse.tdd.ConditionalTestsExamples;
+package JUnitTests.ConditionalTestsExamples;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

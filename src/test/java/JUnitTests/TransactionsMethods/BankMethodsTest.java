@@ -1,14 +1,12 @@
-package tddCourse.tdd.TransactionsMethods;
+package JUnitTests.TransactionsMethods;
 
+import JUnitTests.Entities.Bank;
+import JUnitTests.Eums.ErrorEnum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.*;
-import tddCourse.tdd.Entities.Account;
-import tddCourse.tdd.Entities.Bank;
-import tddCourse.tdd.Eums.ErrorEnum;
+import JUnitTests.Entities.Account;
 
 import java.math.BigDecimal;
-import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +30,7 @@ class BankMethodsTest {
 
         bankMethods.transferMoney(originAccount,destinyAccount, new BigDecimal(500));
 
-        assertEquals("2000.12345",originAccount.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage() );
+        assertEquals("2000.12345",originAccount.getBalance().toPlainString(), ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage() );
         assertEquals("3000.12345",destinyAccount.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage() );
 
     }

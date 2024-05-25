@@ -1,4 +1,4 @@
-package tddCourse.tdd.Entities;
+package JUnitTests.Entities;
 
 import lombok.Getter;
 import lombok.Setter;

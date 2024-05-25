@@ -1,7 +1,7 @@
-package tddCourse.tdd.TransactionsMethods;
+package JUnitTests.TransactionsMethods;
 
-import tddCourse.tdd.Entities.Account;
-import tddCourse.tdd.Entities.Bank;
+import JUnitTests.Entities.Bank;
+import JUnitTests.Entities.Account;
 
 import java.math.BigDecimal;
 
@@ -14,7 +14,7 @@ public class BankMethods {
 
     }
 
-    public void addAccount(Bank bank,Account account){
+    public void addAccount(Bank bank, Account account){
 
         bank.getBankAccounts().add(account);
         account.setBankName(bank);

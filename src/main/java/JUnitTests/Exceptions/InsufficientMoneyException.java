@@ -1,7 +1,4 @@
-package tddCourse.tdd.Exceptions;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+package JUnitTests.Exceptions;
 
 /**
  *

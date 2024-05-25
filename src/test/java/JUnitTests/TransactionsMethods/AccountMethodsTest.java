@@ -1,14 +1,13 @@
-package tddCourse.tdd.TransactionsMethods;
+package JUnitTests.TransactionsMethods;
 
+import JUnitTests.Eums.ErrorEnum;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import tddCourse.tdd.Entities.Account;
-import tddCourse.tdd.Eums.ErrorEnum;
-import tddCourse.tdd.Exceptions.InsufficientMoneyException;
+import JUnitTests.Entities.Account;
+import JUnitTests.Exceptions.InsufficientMoneyException;
 
 import java.math.BigDecimal;
 

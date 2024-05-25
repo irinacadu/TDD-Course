@@ -1,7 +1,7 @@
-package tddCourse.tdd.TransactionsMethods;
+package JUnitTests.TransactionsMethods;
 
-import tddCourse.tdd.Entities.Account;
-import tddCourse.tdd.Exceptions.InsufficientMoneyException;
+import JUnitTests.Entities.Account;
+import JUnitTests.Exceptions.InsufficientMoneyException;
 
 import java.math.BigDecimal;
 

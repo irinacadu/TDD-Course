@@ -1,9 +1,9 @@
-package tddCourse.tdd.Entities;
+package JUnitTests.Entities;
 
+import JUnitTests.Eums.ErrorEnum;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import tddCourse.tdd.Eums.ErrorEnum;
 
 import java.math.BigDecimal;
 
@@ -21,7 +21,7 @@ Account account;
 
         String expectedName="Irina";
         String realName = account.getPerson();
-        assertEquals(expectedName,realName, ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage());
+        Assertions.assertEquals(expectedName,realName, ErrorEnum.NOMBRE_CLIENTE_INEXISTENTE.getErrorMessage());
 
       /*
           String expectedName="Irina".toUpperCase();

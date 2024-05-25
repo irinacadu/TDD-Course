@@ -1,4 +1,4 @@
-package tddCourse.tdd.Eums;
+package JUnitTests.Eums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
