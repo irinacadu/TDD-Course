@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assumptions.*;
 class AccountTest {
 Account account;
 
-    @Test
+    @RepeatedTest(value = 5, name ="Repetición numero {currentRepetition} de {totalRepetitions}")
     @DisplayName("Comprobar que el nombre del cliente es correcto")
     public void test_account_name(){
 

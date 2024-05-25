@@ -2,6 +2,7 @@ package tddCourse.tdd.ConditionalTestsExamples;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.*;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +55,7 @@ public class ConditionalTestsExamples {
     }
 
     @Nested
+    @Tag("param")
     @DisplayName("Probando las propiedades del sistema")
     static class SystemPropertiesTest {
         @Test
@@ -90,6 +92,7 @@ public class ConditionalTestsExamples {
     @DisplayName("Probando las variables de entorno")
     static class EnvironmentVariablesTest {
         @Test
+        @Tag("param")
         @DisplayName("Test que nos muestra las variables del sistema")
         void print_environment_variables() {
             Map<String, String> getEnv = System.getenv();
@@ -100,6 +103,8 @@ public class ConditionalTestsExamples {
 
 
         @Test
+        @Tag("java")
+        @Tag("param")
         @DisplayName("Test que comprueba que tenemos correctamente el JAVA_HOME ")
         @EnabledIfEnvironmentVariable(named = "JAVA_HOME", matches = ".*jdk-11.*")
         void java_home_test() {

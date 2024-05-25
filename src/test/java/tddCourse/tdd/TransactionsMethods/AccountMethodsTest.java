@@ -1,7 +1,11 @@
 package tddCourse.tdd.TransactionsMethods;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import tddCourse.tdd.Entities.Account;
 import tddCourse.tdd.Eums.ErrorEnum;
 import tddCourse.tdd.Exceptions.InsufficientMoneyException;
@@ -18,29 +22,33 @@ class AccountMethodsTest {
      * Si al pasarle como parámetro una cantidad que implique el saldo sea menor que 0 este test va a fallar ya que
      * se va a lanzar la excepción.
      */
-    @Test
-
-    void debit_account_test(){
+    @ParameterizedTest(name= "numero {index} ejecutando con valor {0} - {argumentsWithNames}")
+    @ValueSource(strings = {"100","200","300","500","1000"})
+    void debit_account_test(String balance){
         Account newAccountReal =  Account.builder()
                 .person("John Doe")
                 .balance(new BigDecimal("2500.12345"))
                 .build();
         AccountMethods accountMethods = new AccountMethods();
-        accountMethods.debit(new BigDecimal(500),newAccountReal);
+        accountMethods.debit(new BigDecimal(balance),newAccountReal);
 
         assertNotNull(newAccountReal.getBalance());
+        assertTrue(newAccountReal.getBalance().compareTo(BigDecimal.ZERO)>0);
         assertEquals(2000, newAccountReal.getBalance().intValue(), ErrorEnum.CUENTA_VACIA.getErrorMessage());
         assertEquals("2000.12345", newAccountReal.getBalance().toPlainString(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());
     }
 
-    @Test
-    void credit_account_test(){
+    @ParameterizedTest(name= "numero {index} ejecutando con valor {0} - {argumentsWithNames}")
+    @CsvSource({"1,100","2,200","3,300","4,500","5,1000"})
+
+    void credit_account_test(String index,String balance){
         Account newAccountReal =  Account.builder()
                 .person("John Doe")
                 .balance(new BigDecimal("2500.12345"))
                 .build();
+        System.out.println(index+":"+balance);
         AccountMethods accountMethods = new AccountMethods();
-        accountMethods.credit(new BigDecimal(500),newAccountReal);
+        accountMethods.credit(new BigDecimal(balance),newAccountReal);
 
         assertNotNull(newAccountReal.getBalance(),ErrorEnum.CUENTA_VACIA.getErrorMessage());
         assertEquals(3000, newAccountReal.getBalance().intValue(),ErrorEnum.IMPORTE_INCORRECTO.getErrorMessage());// hasta que el método no esté implementado esta comprobación va a fallar
