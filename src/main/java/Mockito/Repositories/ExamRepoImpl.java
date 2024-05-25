@@ -1,6 +1,8 @@
-package mockitoTests.RepositoriesTests;
+package Mockito.Repositories;
 
-import mockito.Entities.Exam;
+
+
+import Mockito.Entities.Exam;
 
 import java.util.Arrays;
 import java.util.List;

@@ -59,6 +59,7 @@ La gran mayoría de veces nosotros no podemos acceder ni tenemos el control de s
 - Tenemos que aislar nuestras pruebas simulando el comportamiento de los componentes remotos. Eso es lo que hace Mockito, crear objetos simulados (mock) en un entorno controlado y determinado. También nos permite establecer un comportamiento deseado.
 - Para establecer un contexto simulado nos preguntamos ¿Cuándo? Todas las respuestas que puede tener esa pregunta se traducen en la preparación de los entornos para, posteriormente, realizar las comprobaciones.
 - Todo esto está orientado a BDD (Behaviour Driven Development) y TDD.
+- Solamente se pueden hacer *mocks* de métodos públicos.
 
 [account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
 [conditional-examples-test-L113]: https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L113

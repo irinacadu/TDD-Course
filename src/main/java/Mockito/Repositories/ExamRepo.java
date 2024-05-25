@@ -1,6 +1,6 @@
-package mockitoTests.RepositoriesTests;
+package Mockito.Repositories;
 
-import mockito.Entities.Exam;
+import Mockito.Entities.Exam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -4,8 +4,8 @@
    ### Dependencias:
         <!--Mockito-->        
                 <dependency>
-                    <groupId>org.mockito</groupId>
-                    <artifactId>mockito-core</artifactId>
+                    <groupId>org.Mockito</groupId>
+                    <artifactId>Mockito-core</artifactId>
                     <version>4.5.1</version>
                 </dependency>
         
@@ -18,8 +18,8 @@
 
         <!--Mockito-JUnitTests-Jupiter-->
                <dependency>
-                    <groupId>org.mockito</groupId>
-                    <artifactId>mockito-junit-jupiter</artifactId>
+                    <groupId>org.Mockito</groupId>
+                    <artifactId>Mockito-junit-jupiter</artifactId>
                     <version>5.11.0</version>
                     <scope>test</scope>
                </dependency>

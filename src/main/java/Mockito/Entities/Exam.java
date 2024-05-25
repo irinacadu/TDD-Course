@@ -1,4 +1,4 @@
-package mockito.Entities;
+package Mockito.Entities;
 
 import lombok.*;
 
