@@ -9,14 +9,14 @@
                     <version>4.5.1</version>
                 </dependency>
         
-        <!--JUnitTests-->
+        <!--JUnit-->
                 <dependency>
                     <groupId>org.junit.jupiter</groupId>
                     <artifactId>junit-jupiter</artifactId>
                     <version>5.8.2</version>
                 </dependency>
 
-        <!--Mockito-JUnitTests-Jupiter-->
+        <!--Mockito-JUnit-Jupiter-->
                <dependency>
                     <groupId>org.Mockito</groupId>
                     <artifactId>Mockito-junit-jupiter</artifactId>

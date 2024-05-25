@@ -1,4 +1,4 @@
-package JUnitTests.ConditionalTestsExamples;
+package JUnit.ConditionalTestsExamples;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 import java.util.Properties;
+
 @SpringBootTest
 public class ConditionalTestsExamples {
     @Nested

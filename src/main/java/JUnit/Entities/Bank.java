@@ -1,4 +1,4 @@
-package JUnitTests.Entities;
+package JUnit.Entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Getter
 public class Bank {
-    private String name;
     BigDecimal balance;
-    List <Account> bankAccounts = new ArrayList<>();
+    List<Account> bankAccounts = new ArrayList<>();
+    private String name;
 }

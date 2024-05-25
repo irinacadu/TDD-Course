@@ -1,7 +1,6 @@
 package Mockito.Repositories;
 
 
-
 import Mockito.Entities.Exam;
 
 import java.util.Arrays;
@@ -24,5 +23,10 @@ public class ExamRepoImpl implements ExamRepo {
                         .name("Hisoria")
                         .build()
         );
+    }
+
+    @Override
+    public Exam save(Exam examen) {
+        return null;
     }
 }

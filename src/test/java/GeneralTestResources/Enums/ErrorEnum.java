@@ -1,4 +1,4 @@
-package JUnitTests.Eums;
+package GeneralTestResources.Enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
