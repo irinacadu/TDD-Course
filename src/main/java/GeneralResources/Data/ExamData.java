@@ -26,18 +26,18 @@ public class ExamData {
     public final static List<String> QUESTIONS = Arrays.asList("Aritmética", "Trigonometría", "Integrales", "Geometría");
 
     public final static Exam EXAM = Exam.builder()
-                                            .id(null)
-                                            .name("Física")
-                                            .build();
+            .id(null)
+            .name("Física")
+            .build();
 
     public final static List<Exam> EXAMS_ID_NULL = Arrays.asList(
-                                                            Exam.builder()
-                                                                        .id(null)
-                                                                        .name("Naturales")
-                                                                        .build(),
-                                                            Exam.builder()
-                                                                    .id(null)
-                                                                    .name("Sociales")
-                                                                    .build()
+            Exam.builder()
+                    .id(null)
+                    .name("Naturales")
+                    .build(),
+            Exam.builder()
+                    .id(null)
+                    .name("Sociales")
+                    .build()
     );
 }

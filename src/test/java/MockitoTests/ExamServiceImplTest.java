@@ -1,4 +1,4 @@
-package MockitoTests.RepositoriesTests;
+package MockitoTests;
 
 import GeneralResources.ArgsMatchers.PersonalizedArgsMatchers;
 import GeneralResources.Data.ExamData;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
@@ -36,7 +37,6 @@ class ExamServiceImplTest {
     ExamQuestionsRepositoryImpl examQuestionsRepository;
     @InjectMocks
     ExamServiceImpl examService;
-
 
     @Test
     @DisplayName("Comprueba que el examen que buscamos existe")
@@ -98,15 +98,17 @@ class ExamServiceImplTest {
         verify(examRepo).findAll();
         verify(examQuestionsRepository).findQuestionsByExamId(5L);
     }
+
     @Test
     @DisplayName("Comprueba si el examen se guarda")
     void save_exam_test() {
         Exam exam = ExamData.EXAM;
         exam.setQuestions(ExamData.QUESTIONS);
 
-        when(examRepo.save(exam)).then(new Answer(){
+        when(examRepo.save(exam)).then(new Answer() {
 
-            Long sequence  = 8L;
+            Long sequence = 8L;
+
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
                 Exam examAnonymous = invocationOnMock.getArgument(0);
@@ -117,8 +119,8 @@ class ExamServiceImplTest {
         examService.save(ExamData.EXAM);
 
         assertNotNull(exam.getId());
-        assertEquals(8L,exam.getId());
-        assertEquals("Física",exam.getName());
+        assertEquals(8L, exam.getId());
+        assertEquals("Física", exam.getName());
 
         verify(examRepo).save(exam);
         verify(examQuestionsRepository).saveQuestions(anyList());
@@ -126,19 +128,19 @@ class ExamServiceImplTest {
     }
 
     @Test
-    void excepcion_handling_test(){
+    void excepcion_handling_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS_ID_NULL);
         when(examQuestionsRepository.findQuestionsByExamId(isNull())).thenThrow(IllegalArgumentException.class);
 
-        Exception exception =  assertThrows(IllegalArgumentException.class, ()->{
-           examService.findQuestionsByExamName("Sociales");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            examService.findQuestionsByExamName("Sociales");
         });
         assertEquals(IllegalArgumentException.class, exception.getClass());
 
     }
 
     @Test
-    void argument_matchers_test(){
+    void argument_matchers_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
         when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
 
@@ -146,12 +148,12 @@ class ExamServiceImplTest {
         examService.findQuestionsByExamName("Matemáticas");
 
         verify(examRepo).findAll();
-        verify(examQuestionsRepository).findQuestionsByExamId(argThat(arg->arg.equals(5L)));
+        verify(examQuestionsRepository).findQuestionsByExamId(argThat(arg -> arg.equals(5L)));
 
     }
 
     @Test
-    void personalized_argument_matchers_test(){
+    void personalized_argument_matchers_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS_ID_NULL);
         when(examQuestionsRepository.findQuestionsByExamId(isNull())).thenReturn(ExamData.QUESTIONS);
 
@@ -161,8 +163,9 @@ class ExamServiceImplTest {
         verify(examQuestionsRepository).findQuestionsByExamId(argThat(new PersonalizedArgsMatchers()));
 
     }
+
     @Test
-    void argument_captor_test(){
+    void argument_captor_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
         when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
 
@@ -172,30 +175,30 @@ class ExamServiceImplTest {
 
         verify(examQuestionsRepository).findQuestionsByExamId(captor.capture());
 
-        assertEquals(5l, captor.getValue());
+        assertEquals(5L, captor.getValue());
 
     }
 
     @Test
-    void do_throw_test(){
+    void do_throw_test() {
         Exam exam = ExamData.EXAM;
         exam.setQuestions(ExamData.QUESTIONS);
 
         doThrow(IllegalArgumentException.class).when(examQuestionsRepository).saveQuestions(anyList());
 
-        assertThrows(IllegalArgumentException.class,()->{
+        assertThrows(IllegalArgumentException.class, () -> {
             examService.save(exam);
         });
 
     }
 
     @Test
-    void do_answer_test(){
+    void do_answer_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
 //        when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
-        doAnswer(invocation ->{
+        doAnswer(invocation -> {
             Long idExam = invocation.getArgument(0);
-            return idExam == 5L? ExamData.QUESTIONS:null;
+            return idExam == 5L ? ExamData.QUESTIONS : null;
         }).when(examQuestionsRepository).findQuestionsByExamId(anyLong());
 
         Exam exam = examService.findQuestionsByExamName("Matemáticas");
@@ -205,7 +208,7 @@ class ExamServiceImplTest {
     }
 
     @Test
-    void do_call_real_method_test(){
+    void do_call_real_method_test() {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
 //        when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
         doCallRealMethod().when(examQuestionsRepository).findQuestionsByExamId(anyLong());
@@ -215,26 +218,58 @@ class ExamServiceImplTest {
         assertEquals("Matemáticas", exam.getName());
 
     }
+
     @Test
-    void spy_test(){
+    void spy_test() {
         ExamRepo examRepo = spy(ExamRepoImpl.class);
         ExamQuestionsRepository examQuestionsRepository1 = spy(ExamQuestionsRepositoryImpl.class);
         //No lo podemos utilizar con spy -> when(examQuestionsRepository1.findQuestionsByExamId(anyLong())).thenReturn(ExamData.EXAM.getQuestions());
-        List <String> questions = ExamData.QUESTIONS;
+        List<String> questions = ExamData.QUESTIONS;
         doReturn(questions).when(examQuestionsRepository1).findQuestionsByExamId(anyLong());
 
-        ExamService examService1 = new ExamServiceImpl(examRepo,examQuestionsRepository1);
+        ExamService examService1 = new ExamServiceImpl(examRepo, examQuestionsRepository1);
 
         Exam exam = examService1.findQuestionsByExamName("Matemáticas");
-        assertEquals(5,exam.getId());
-        assertEquals("Matemáticas",exam.getName());
-        assertEquals(4,exam.getQuestions().size());
+        assertEquals(5, exam.getId());
+        assertEquals("Matemáticas", exam.getName());
+        assertEquals(4, exam.getQuestions().size());
         assertTrue(exam.getQuestions().contains("Geometría"));
 
         verify(examRepo).findAll();
         verify(examQuestionsRepository1).findQuestionsByExamId(anyLong());
 
     }
+
+    @Test
+    void know_order_test() {
+        when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
+
+        examService.findQuestionsByExamName("Historia");
+        examService.findQuestionsByExamName("Lengua");
+
+        InOrder inOrder = inOrder(examRepo, examQuestionsRepository);
+        inOrder.verify(examRepo).findAll();
+        inOrder.verify(examQuestionsRepository).findQuestionsByExamId(7L);
+        inOrder.verify(examRepo).findAll();
+        inOrder.verify(examQuestionsRepository).findQuestionsByExamId(6L);
+
+    }
+
+    @Test
+    void know_number_of_invocations_test() {
+        when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
+
+        examService.findQuestionsByExamName("Matemáticas");
+        verify(examQuestionsRepository).findQuestionsByExamId(5L);
+        verify(examQuestionsRepository, times(1)).findQuestionsByExamId(5L);
+        // verify(examQuestionsRepository,atLeast(1)).findQuestionsByExamId(5L);
+        verify(examQuestionsRepository, atLeastOnce()).findQuestionsByExamId(5L);
+        verify(examQuestionsRepository, atMost(2)).findQuestionsByExamId(5L);
+        verify(examQuestionsRepository, atMostOnce()).findQuestionsByExamId(5L);
+
+
+    }
+
     /**
      * Ejemplo de como sería la creación e inyección de mocks sin utilizar las anotaciones @Mock e @InjectMocks
      */
@@ -243,7 +278,7 @@ class ExamServiceImplTest {
       /* examRepo = mock(ExamRepoImpl.class);
        examQuestionsRepository = mock(ExamQuestionsRepositoryImpl.class);
        examService = new ExamServiceImpl(examRepo,examQuestionsRepository);*/
-    // MockitoAnnotations.openMocks(this);
+        // MockitoAnnotations.openMocks(this);
     }
 
 

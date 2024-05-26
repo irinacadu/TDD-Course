@@ -5,7 +5,7 @@ import GeneralResources.Data.ExamData;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ExamQuestionsRepositoryImpl implements  ExamQuestionsRepository{
+public class ExamQuestionsRepositoryImpl implements ExamQuestionsRepository {
     @Override
     public List<String> findQuestionsByExamId(Long id) {
         System.out.println("ExamQuestionsRepositoryImpl.findQuestionsByExamId");

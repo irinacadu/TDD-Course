@@ -9,5 +9,6 @@ public interface ExamService {
     Optional<Exam> findExamByName(String name);
 
     Exam findQuestionsByExamName(String name);
-    Exam save (Exam exam);
+
+    Exam save(Exam exam);
 }

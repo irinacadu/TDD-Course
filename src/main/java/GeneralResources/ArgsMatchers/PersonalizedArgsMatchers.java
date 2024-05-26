@@ -5,6 +5,7 @@ import org.mockito.ArgumentMatcher;
 public class PersonalizedArgsMatchers implements ArgumentMatcher<Long> {
 
     private Long argument;
+
     @Override
     public boolean matches(Long argument) {
         this.argument = argument;
@@ -18,6 +19,6 @@ public class PersonalizedArgsMatchers implements ArgumentMatcher<Long> {
      */
     @Override
     public String toString() {
-        return "El argumento " + argument +" no es válido.";
+        return "El argumento " + argument + " no es válido.";
     }
 }
