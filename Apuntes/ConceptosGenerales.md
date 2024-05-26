@@ -14,7 +14,7 @@
 - El tipo BigDecimal se compara con *compareTo()*
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 - Utilizando *fail();* al principio del test vamos a provocar el error del test entero. Es un método estático de la clase Assertions.
-   * Ver Ej. [Account entity test L53][account-entity-test-L53]
+   * Ver Ej. [Account entity test L64][account-entity-test-L64]
 - Para poder testear en entornos concretos [Conditional examples test L14][conditional-examples-test-L14]
 
 ## Tests unitarios 
