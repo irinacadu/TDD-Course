@@ -17,16 +17,7 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 class AccountTest {
     Account account;
 
-    @BeforeAll
-    static void beforeAll() {
-        System.out.println("Inicializando el test");
 
-    }
-
-    @AfterAll
-    static void afterAll() {
-        System.out.println("Finalizando el test");
-    }
 
     @RepeatedTest(value = 5, name = "Repetición numero {currentRepetition} de {totalRepetitions}")
     @DisplayName("Comprobar que el nombre del cliente es correcto")
@@ -109,5 +100,16 @@ class AccountTest {
     @AfterEach
     void end_test_method() {
         System.out.println("Finalizando el método");
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Inicializando el test");
+
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("Finalizando el test");
     }
 }
