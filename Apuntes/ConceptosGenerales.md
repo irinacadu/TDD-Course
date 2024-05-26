@@ -15,7 +15,7 @@
 - Una de las características de JUnit Jupiter es que soporta expresiones lambda.
 - Utilizando *fail();* al principio del test vamos a provocar el error del test entero. Es un método estático de la clase Assertions.
    * Ver Ej. [Account entity test L53][account-entity-test-L53]
-- Para poder testear en entornos concretos [Conditional examples test L113][conditional-examples-test-L113]
+- Para poder testear en entornos concretos [Conditional examples test L14][conditional-examples-test-L14]
 
 ## Tests unitarios 
 - Tenemos que tener en cuenta que por cada test se va a crear una instancia nueva es decir, el valor que utilicemos en el test solo funcionará para ese test.
@@ -23,9 +23,9 @@
 - Hay que procurar que cada uno de loes tests estén lo más desacoplados posible entre ellos.
 - Los tests se tienen que volver a probar constantemente.
 - Podemos estructurar los tests resolviendo los siguientes:
-    * GIVEN: Describe el estado antes de empezar el comportamiento que se está especificando en el escenario. Condiciones previas a la prueba.
-    * WHEN: Es el comportamiento que se especifica en la prueba.
-    * THEN: Son los comportamientos que se esperan debidos al WHEN.
+    * **GIVEN**: Describe el estado antes de empezar el comportamiento que se está especificando en el escenario. Condiciones previas a la prueba.
+    * **WHEN**: Es el comportamiento que se especifica en la prueba.
+    * **THEN**: Son los comportamientos que se esperan debidos al WHEN.
 
 ## Ejecución de tests en clases anidadas (nested class)
 - Con la anotación **@Nested** indicamos que la clase es anidada. Para que las clases anidadas se ejecuten en los tests deben ser static.
@@ -41,7 +41,7 @@
 - Para poder ver el reporte de las pruebas podemos ir a la carpeta *target -> surfire-reports*
 
 
-[account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
-[conditional-examples-test-L113]: https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L113
+[account-entity-test-L64]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L64
+[conditional-examples-test-L14]: https://github.com/irinacadu/TDD-Course/blob/0e0866d9bc86724c85402cef112c943bb3f1a505/src/test/java/JUnit/ConditionalTestsExamples/ConditionalTestsExamples.java#L14
 
 
