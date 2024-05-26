@@ -30,6 +30,7 @@ class AccountTest {
 
     @RepeatedTest(value = 5, name = "Repetición numero {currentRepetition} de {totalRepetitions}")
     @DisplayName("Comprobar que el nombre del cliente es correcto")
+//  @Disabled
     public void test_account_name() {
 
 
