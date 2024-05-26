@@ -1,10 +1,12 @@
 package MockitoTests.RepositoriesTests;
 
-import GeneralTestResources.ArgsMatchers.PersonalizedArgsMatchers;
-import GeneralTestResources.Data.ExamData;
+import GeneralResources.ArgsMatchers.PersonalizedArgsMatchers;
+import GeneralResources.Data.ExamData;
 import Mockito.Entities.Exam;
 import Mockito.Repositories.ExamQuestionsRepository;
+import Mockito.Repositories.ExamQuestionsRepositoryImpl;
 import Mockito.Repositories.ExamRepo;
+import Mockito.Repositories.ExamRepoImpl;
 import Mockito.Services.ExamServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,11 +30,12 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ExamRepoImplTest {
     @Mock
-    ExamRepo examRepo;
+    ExamRepoImpl examRepo;
     @Mock
-    ExamQuestionsRepository examQuestionsRepository;
+    ExamQuestionsRepositoryImpl examQuestionsRepository;
     @InjectMocks
     ExamServiceImpl examService;
+
 
     @Test
     @DisplayName("Comprueba que el examen que buscamos existe")
@@ -199,13 +202,25 @@ class ExamRepoImplTest {
         assertEquals("Matemáticas", exam.getName());
 
     }
+
+    @Test
+    void do_call_real_method_test(){
+        when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
+//        when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
+        doCallRealMethod().when(examQuestionsRepository).findQuestionsByExamId(anyLong());
+        Exam exam = examService.findQuestionsByExamName("Matemáticas");
+
+        assertEquals(5L, exam.getId());
+        assertEquals("Matemáticas", exam.getName());
+
+    }
     /**
      * Ejemplo de como sería la creación e inyección de mocks sin utilizar las anotaciones @Mock e @InjectMocks
      */
     @BeforeEach
     void setUp() {
-      /* examRepo = mock(ExamRepo.class);
-       examQuestionsRepository = mock(ExamQuestionsRepository.class);
+      /* examRepo = mock(ExamRepoImpl.class);
+       examQuestionsRepository = mock(ExamQuestionsRepositoryImpl.class);
        examService = new ExamServiceImpl(examRepo,examQuestionsRepository);*/
     // MockitoAnnotations.openMocks(this);
     }

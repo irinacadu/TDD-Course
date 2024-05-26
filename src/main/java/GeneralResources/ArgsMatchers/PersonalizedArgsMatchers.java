@@ -1,7 +1,6 @@
-package GeneralTestResources.ArgsMatchers;
+package GeneralResources.ArgsMatchers;
 
 import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
 
 public class PersonalizedArgsMatchers implements ArgumentMatcher<Long> {
 

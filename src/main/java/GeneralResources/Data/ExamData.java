@@ -1,4 +1,4 @@
-package GeneralTestResources.Data;
+package GeneralResources.Data;
 
 import Mockito.Entities.Exam;
 

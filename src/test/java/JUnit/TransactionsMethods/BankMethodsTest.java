@@ -2,7 +2,7 @@ package JUnit.TransactionsMethods;
 
 import JUnit.Entities.Account;
 import JUnit.Entities.Bank;
-import GeneralTestResources.Enums.ErrorEnum;
+import GeneralResources.Enums.ErrorEnum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package JUnit.TransactionsMethods;
 
 import JUnit.Entities.Account;
-import GeneralTestResources.Enums.ErrorEnum;
+import GeneralResources.Enums.ErrorEnum;
 import JUnit.Exceptions.InsufficientMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

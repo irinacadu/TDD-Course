@@ -1,4 +1,4 @@
-package GeneralTestResources.Enums;
+package GeneralResources.Enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package JUnit.Entities;
 
 
-import GeneralTestResources.Enums.ErrorEnum;
+import GeneralResources.Enums.ErrorEnum;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
