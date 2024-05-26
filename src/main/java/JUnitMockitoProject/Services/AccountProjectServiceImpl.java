@@ -3,6 +3,7 @@ package JUnitMockitoProject.Services;
 import JUnit.Exceptions.InsufficientMoneyException;
 import JUnitMockitoProject.Entities.AccountProject;
 import JUnitMockitoProject.Entities.BankProject;
+import JUnitMockitoProject.Exceptions.InsufficientMoneyProjectException;
 import JUnitMockitoProject.Respositories.AccountProjectRepository;
 import JUnitMockitoProject.Respositories.BankProjectRepository;
 
@@ -13,8 +14,9 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     private AccountProjectRepository accountProjectRepository;
     private BankProjectRepository bankProjectRepository;
 
-    public AccountProjectServiceImpl(AccountProjectRepository accountProjectRepository) {
+    public AccountProjectServiceImpl(AccountProjectRepository accountProjectRepository, BankProjectRepository bankProjectRepository) {
         this.accountProjectRepository = accountProjectRepository;
+        this.bankProjectRepository = bankProjectRepository;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     public void debit(BigDecimal amount, AccountProject accountProject) {
         BigDecimal remainingBalance = accountProject.getBalance().subtract(amount);
         if (remainingBalance.compareTo(BigDecimal.ZERO) < 0) {
-            throw new InsufficientMoneyException("Dinero insuficiente");
+            throw new InsufficientMoneyProjectException("Dinero insuficiente");
         }
 
         accountProject.setBalance(remainingBalance);
