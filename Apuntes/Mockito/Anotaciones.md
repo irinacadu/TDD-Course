@@ -6,9 +6,11 @@
 - **@Mock**: Utilizamos esta anotación para que en vez de crearlo nosotros se cree automáticamente.
     * Ej.Ver [Exam repo. impl.test L25][exam-repo-impl-test-L25]
 - **@InjectMock**: Utilizamos esta anotación para que los mocks se inyectén automáticamente. La inyección no funcionará con interfaces.
-    ** Ej.Ver [Exam repo. impl.test L31][exam-repo-impl-test-L31]
+    * Ej.Ver [Exam repo. impl.test L31][exam-repo-impl-test-L31]
+- **@Spy**: a parte de utilizar el método spy descrito en el archivo MetodosMockito.md, podemos crear un spy automáticamente con esta anotación.
 
 [exam-repo-impl-test-L27]: https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L27
 [exam-repo-impl-test-L31]:https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L31
 [exam-repo-impl-test-L101]:https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L101
 [exam-repo-impl-test-L25]:https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L25
+[exam-repo-impl-test-]

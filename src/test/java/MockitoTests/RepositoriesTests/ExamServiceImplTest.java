@@ -7,6 +7,7 @@ import Mockito.Repositories.ExamQuestionsRepository;
 import Mockito.Repositories.ExamQuestionsRepositoryImpl;
 import Mockito.Repositories.ExamRepo;
 import Mockito.Repositories.ExamRepoImpl;
+import Mockito.Services.ExamService;
 import Mockito.Services.ExamServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +29,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ExamRepoImplTest {
+class ExamServiceImplTest {
     @Mock
     ExamRepoImpl examRepo;
     @Mock
@@ -212,6 +213,26 @@ class ExamRepoImplTest {
 
         assertEquals(5L, exam.getId());
         assertEquals("Matemáticas", exam.getName());
+
+    }
+    @Test
+    void spy_test(){
+        ExamRepo examRepo = spy(ExamRepoImpl.class);
+        ExamQuestionsRepository examQuestionsRepository1 = spy(ExamQuestionsRepositoryImpl.class);
+        //No lo podemos utilizar con spy -> when(examQuestionsRepository1.findQuestionsByExamId(anyLong())).thenReturn(ExamData.EXAM.getQuestions());
+        List <String> questions = ExamData.QUESTIONS;
+        doReturn(questions).when(examQuestionsRepository1).findQuestionsByExamId(anyLong());
+
+        ExamService examService1 = new ExamServiceImpl(examRepo,examQuestionsRepository1);
+
+        Exam exam = examService1.findQuestionsByExamName("Matemáticas");
+        assertEquals(5,exam.getId());
+        assertEquals("Matemáticas",exam.getName());
+        assertEquals(4,exam.getQuestions().size());
+        assertTrue(exam.getQuestions().contains("Geometría"));
+
+        verify(examRepo).findAll();
+        verify(examQuestionsRepository1).findQuestionsByExamId(anyLong());
 
     }
     /**
