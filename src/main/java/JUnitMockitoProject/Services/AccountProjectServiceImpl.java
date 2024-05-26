@@ -2,10 +2,54 @@ package JUnitMockitoProject.Services;
 
 import JUnit.Exceptions.InsufficientMoneyException;
 import JUnitMockitoProject.Entities.AccountProject;
+import JUnitMockitoProject.Entities.BankProject;
+import JUnitMockitoProject.Respositories.AccountProjectRepository;
+import JUnitMockitoProject.Respositories.BankProjectRepository;
 
 import java.math.BigDecimal;
 
 public class AccountProjectServiceImpl implements AccountProjectService {
+
+    private AccountProjectRepository accountProjectRepository;
+    private BankProjectRepository bankProjectRepository;
+
+    public AccountProjectServiceImpl(AccountProjectRepository accountProjectRepository) {
+        this.accountProjectRepository = accountProjectRepository;
+    }
+
+    @Override
+    public AccountProject findById(Long id) {
+        return accountProjectRepository.findById(id);
+    }
+
+    @Override
+    public int reviewTotalTransfer(Long bankId) {
+        BankProject bankProject = bankProjectRepository.findById(bankId);
+        return bankProject.getTotalTransfer();
+    }
+
+    @Override
+    public BigDecimal reviewBalance(Long bankId) {
+        AccountProject accountProject = accountProjectRepository.findById(bankId);
+        return accountProject.getBalance();
+    }
+
+    @Override
+    public void transferAmount(Long originAccount, Long destinyAccount, BigDecimal amount, Long bankId) {
+        BankProject bankProject = bankProjectRepository.findById(bankId);
+        int totalTransfers = bankProject.getTotalTransfer();
+        bankProject.setTotalTransfer(++totalTransfers);
+        bankProjectRepository.update(bankProject);
+
+        AccountProject accountProjectOrigin = accountProjectRepository.findById(originAccount);
+        debit(amount,accountProjectOrigin);
+        accountProjectRepository.update(accountProjectOrigin);
+
+        AccountProject accountProjectDestiny = accountProjectRepository.findById(destinyAccount);
+        credit(amount,accountProjectDestiny);
+        accountProjectRepository.update(accountProjectDestiny);
+
+    }
 
     @Override
     public void debit(BigDecimal amount, AccountProject accountProject) {
