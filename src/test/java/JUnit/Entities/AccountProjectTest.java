@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 @SpringBootTest
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AccountTest {
+class AccountProjectTest {
     Account account;
 
 

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Hasta que los métodos no estén implementados los tests no van a funcionar
  */
-class AccountMethodsTest {
+class AccountProjectMethodsTest {
     /**
      * Si al pasarle como parámetro una cantidad que implique el saldo sea menor que 0 este test va a fallar ya que
      * se va a lanzar la excepción.

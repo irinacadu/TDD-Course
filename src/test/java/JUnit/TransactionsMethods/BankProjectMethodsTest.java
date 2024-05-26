@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BankMethodsTest {
+class BankProjectMethodsTest {
 
     @Test
     @DisplayName("Comprobar que las transferencias entre cuentas se ejecutan.")
