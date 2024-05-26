@@ -11,27 +11,49 @@ import JUnitMockitoProject.Services.AccountProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class JUnitMockitoProjectTest {
+public class JUnitMockitoProjectTestWithAnnotations {
 
+    /**
+     * Anotaciones Mockito
+     * Se tiene que anotar el servicio del proyecto con @Service
+     */
+   /* @Mock
     AccountProjectRepository accountProjectRepository;
+
+    @Mock
     BankProjectRepository bankProjectRepository;
 
-    AccountProjectService accountProjectService;
+    @InjectMocks
+    AccountProjectServiceImpl accountProjectService;*/
 
-    @BeforeEach
-    void setUp() {
-        accountProjectRepository = mock(AccountProjectRepository.class);
-        bankProjectRepository = mock(BankProjectRepository.class);
-        accountProjectService = new AccountProjectServiceImpl(accountProjectRepository,bankProjectRepository);
-    }
+    /**
+     * Anotaciones Spring Boot
+     * Se tiene que anotar el servicio del proyecto con @Service
+     */
+      @MockBean
+      AccountProjectRepository accountProjectRepository;
+
+      @MockBean
+      BankProjectRepository bankProjectRepository;
+
+      @Autowired
+      AccountProjectServiceImpl accountProjectService;
+
 
     @Test
     @DisplayName("Comprobamos aldo inicial, transferencias entre cuentas, saldo final despues de transfer y veces que se ha llamado a los método")
@@ -130,5 +152,4 @@ class JUnitMockitoProjectTest {
         verify(accountProjectRepository,times(2)).findById(1L);
 
     }
-
 }

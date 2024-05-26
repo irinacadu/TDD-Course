@@ -6,9 +6,11 @@ import JUnitMockitoProject.Entities.BankProject;
 import JUnitMockitoProject.Exceptions.InsufficientMoneyProjectException;
 import JUnitMockitoProject.Respositories.AccountProjectRepository;
 import JUnitMockitoProject.Respositories.BankProjectRepository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Service
 public class AccountProjectServiceImpl implements AccountProjectService {
 
     private AccountProjectRepository accountProjectRepository;
@@ -38,10 +40,6 @@ public class AccountProjectServiceImpl implements AccountProjectService {
 
     @Override
     public void transferAmount(Long originAccount, Long destinyAccount, BigDecimal amount, Long bankId) {
-        BankProject bankProject = bankProjectRepository.findById(bankId);
-        int totalTransfers = bankProject.getTotalTransfer();
-        bankProject.setTotalTransfer(++totalTransfers);
-        bankProjectRepository.update(bankProject);
 
         AccountProject accountProjectOrigin = accountProjectRepository.findById(originAccount);
         debit(amount,accountProjectOrigin);
@@ -50,6 +48,11 @@ public class AccountProjectServiceImpl implements AccountProjectService {
         AccountProject accountProjectDestiny = accountProjectRepository.findById(destinyAccount);
         credit(amount,accountProjectDestiny);
         accountProjectRepository.update(accountProjectDestiny);
+
+        BankProject bankProject = bankProjectRepository.findById(bankId);
+        int totalTransfers = bankProject.getTotalTransfer();
+        bankProject.setTotalTransfer(++totalTransfers);
+        bankProjectRepository.update(bankProject);
 
     }
 

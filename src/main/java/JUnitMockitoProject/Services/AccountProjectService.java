@@ -1,9 +1,11 @@
 package JUnitMockitoProject.Services;
 
 import JUnitMockitoProject.Entities.AccountProject;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Service
 public interface AccountProjectService {
 
     AccountProject findById(Long id);

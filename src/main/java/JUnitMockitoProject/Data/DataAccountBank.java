@@ -6,7 +6,7 @@ import JUnitMockitoProject.Entities.BankProject;
 import java.math.BigDecimal;
 
 public class DataAccountBank {
-    public static final AccountProject ACCOUNT_001 = AccountProject.builder()
+/*    public static final AccountProject ACCOUNT_001 = AccountProject.builder()
                                                                     .id(1L)
                                                                     .person("Irina")
                                                                     .balance(new BigDecimal("1000"))
@@ -21,5 +21,30 @@ public class DataAccountBank {
                                                             .id(1L)
                                                             .bankName("Financial Bank")
                                                             .totalTransfer(0)
-                                                            .build();
+                                                            .build();*/
+
+
+    public static AccountProject createAccount_001(){
+        return  AccountProject.builder()
+                .id(1L)
+                .person("Irina")
+                .balance(new BigDecimal("1000"))
+                .build();
+    }
+
+    public static AccountProject createAccount_002(){
+        return  AccountProject.builder()
+                .id(2L)
+                .person("Candela")
+                .balance(new BigDecimal("2000"))
+                .build();
+    }
+
+    public static BankProject createBank_001(){
+        return  BankProject.builder()
+                .id(1L)
+                .bankName("Financial Bank")
+                .totalTransfer(0)
+                .build();
+    }
 }
