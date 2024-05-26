@@ -65,12 +65,12 @@
 - Todo esto está orientado a BDD (Behaviour Driven Development) y TDD.
 - Solamente se pueden hacer *mocks* de métodos públicos.
 - Ejemplo de generación de id autoincremental a través de una clase anónima que implementa la interfaz Answer [exam-repo-impl-tests-L104]
-- Los [ArgumentMatchers] [exam-repo-impl-tests-L146] es una característica de mockito que permite saber si coincide el valor real que se pasa por argumento en un método y lo comparamos con los definidos en el mock.
-- Podemos crear nuestros propios arguments. Ej. PersonalizedArgsMatchers.java
+
+
+
+
 [account-entity-test-L53]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L53
 [conditional-examples-test-L113]: https://github.com/irinacadu/TDD-Course/blob/f247291c1ab3de81a49736c769c177bf33651093/src/test/java/tddCourse/tdd/ConditionalTestsExamples/ConditionalTestsExamples.java#L113
 [exam-repo-impl-tests-L104]:https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L104
-[exam-repo-impl-tests-L146]:https://github.com/irinacadu/TDD-Course/blob/97739bad76f701e03e730960385f6ce7626e911f/src/test/java/MockitoTests/RepositoriesTests/ExamRepoImplTest.java#L146
-
 
 

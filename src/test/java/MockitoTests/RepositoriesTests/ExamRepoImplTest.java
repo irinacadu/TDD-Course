@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
@@ -22,8 +23,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ExamRepoImplTest {
@@ -151,11 +151,52 @@ class ExamRepoImplTest {
         when(examRepo.findAll()).thenReturn(ExamData.EXAMS_ID_NULL);
         when(examQuestionsRepository.findQuestionsByExamId(isNull())).thenReturn(ExamData.QUESTIONS);
 
-
         examService.findQuestionsByExamName("Naturales");
 
         verify(examRepo).findAll();
         verify(examQuestionsRepository).findQuestionsByExamId(argThat(new PersonalizedArgsMatchers()));
+
+    }
+    @Test
+    void argument_captor_test(){
+        when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
+        when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
+
+        examService.findQuestionsByExamName("Matemáticas");
+
+        ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
+
+        verify(examQuestionsRepository).findQuestionsByExamId(captor.capture());
+
+        assertEquals(5l, captor.getValue());
+
+    }
+
+    @Test
+    void do_throw_test(){
+        Exam exam = ExamData.EXAM;
+        exam.setQuestions(ExamData.QUESTIONS);
+
+        doThrow(IllegalArgumentException.class).when(examQuestionsRepository).saveQuestions(anyList());
+
+        assertThrows(IllegalArgumentException.class,()->{
+            examService.save(exam);
+        });
+
+    }
+
+    @Test
+    void do_answer_test(){
+        when(examRepo.findAll()).thenReturn(ExamData.EXAMS);
+//        when(examQuestionsRepository.findQuestionsByExamId(anyLong())).thenReturn(ExamData.QUESTIONS);
+        doAnswer(invocation ->{
+            Long idExam = invocation.getArgument(0);
+            return idExam == 5L? ExamData.QUESTIONS:null;
+        }).when(examQuestionsRepository).findQuestionsByExamId(anyLong());
+
+        Exam exam = examService.findQuestionsByExamName("Matemáticas");
+        assertEquals(5L, exam.getId());
+        assertEquals("Matemáticas", exam.getName());
 
     }
     /**
