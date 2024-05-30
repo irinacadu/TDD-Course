@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -41,4 +42,68 @@ public class IntegrationJPATest {
         assertFalse(accountsProject.isEmpty());
         assertEquals(2, accountsProject.size());
     }
+
+    @Test
+    void save_test() {
+
+        //GIVEN
+        AccountProject accountMaria = AccountProject.builder()
+                .person("Maria")
+                .balance(new BigDecimal("3000"))
+                .build();
+
+        accountProjectRepository.save(accountMaria);
+
+        //WHEN
+        AccountProject account = accountProjectRepository.findByPerson("Maria").orElseThrow();
+
+        //THEN
+        assertEquals("Maria", account.getPerson());
+        assertEquals("3000", account.getBalance().toPlainString());
+        assertEquals(3, account.getId());
+
+    }
+
+    @Test
+    void update_test() {
+        //GIVEN
+        AccountProject accountMaria = AccountProject.builder()
+                .person("Maria")
+                .balance(new BigDecimal("3000"))
+                .build();
+
+        AccountProject account = accountProjectRepository.save(accountMaria);
+        assertEquals("Maria", account.getPerson());
+        assertEquals("3000", account.getBalance().toPlainString());
+        assertEquals(3, account.getId());
+
+        //WHEN
+        account.setBalance(new BigDecimal("4000"));
+        AccountProject updatedAccount = accountProjectRepository.save(accountMaria);
+
+        //THEN
+        assertEquals("Maria", updatedAccount.getPerson());
+        assertEquals("4000", updatedAccount.getBalance().toPlainString());
+        assertEquals(3, updatedAccount.getId());
+
+    }
+
+    @Test
+    void delete_test() {
+
+        //GIVEN
+        AccountProject account = accountProjectRepository.findById(1L).orElseThrow();
+        assertEquals("Irina", account.getPerson());
+
+        //WHEN
+        accountProjectRepository.delete(account);
+        
+        //THEN
+        assertThrows(NoSuchElementException.class, () -> {
+            accountProjectRepository.findByPerson("Irina").orElseThrow();
+        });
+
+    }
+
+
 }
