@@ -7,6 +7,7 @@ import JUnitMockitoProject.Exceptions.InsufficientMoneyProjectException;
 import JUnitMockitoProject.Respositories.AccountProjectRepository;
 import JUnitMockitoProject.Respositories.BankProjectRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -22,12 +23,14 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public AccountProject findById(Long id) {
 
         return accountProjectRepository.findById(id).orElseThrow();
     }
 
     @Override
+    @Transactional()
     public int reviewTotalTransfer(Long bankId) {
         BankProject bankProject = bankProjectRepository.findById(bankId).orElseThrow();
         return bankProject.getTotalTransfer();
