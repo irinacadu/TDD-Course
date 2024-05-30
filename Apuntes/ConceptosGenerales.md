@@ -45,8 +45,18 @@
 ## Ejemplos completos
 - Ejemplo de clase con tests [sin anotaciones][JUnit-mockito-project-test]
 
+## JPA
+
+- [Documentación JPA] [Documentación JPA]
+- Es una interfaz genérica que ya posee métodos propios cono findAll, delete, findByID...
+- Nuestras clases repositorio heredan de estas clases. 
+- Las consultas que se pueden realizar no tienen porque ser nativas, es decir, no tienen porque ir a consultar a una tabla si no que la consulta se hace al objeto. Para esto se utiliza la anotación @Query.
+- CRUDRepository es más abstracto. JPARepository implementa ésta interfaz y añade más funcionalidades.
+
+
 [account-entity-test-L64]:https://github.com/irinacadu/TDD-Course/blob/133e856b7c03dbe2b2b287fe77216b839fe773c5/src/test/java/tddCourse/tdd/Entities/AccountTest.java#L64
 [conditional-examples-test-L14]: https://github.com/irinacadu/TDD-Course/blob/0e0866d9bc86724c85402cef112c943bb3f1a505/src/test/java/JUnit/ConditionalTestsExamples/ConditionalTestsExamples.java#L14
 [JUnit-mockito-project-test]:https://github.com/irinacadu/TDD-Course/blob/3d4384d4ee195f4c6b24c2fecc3db76d3f034023/src/test/java/JUnitMockitoProject/JUnitMockitoProjectTest.java#L20
+[Documentación JPA]: https://spring.io/projects/spring-data
 
 

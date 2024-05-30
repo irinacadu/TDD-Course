@@ -23,36 +23,37 @@ public class AccountProjectServiceImpl implements AccountProjectService {
 
     @Override
     public AccountProject findById(Long id) {
-        return accountProjectRepository.findById(id);
+
+        return accountProjectRepository.findById(id).orElseThrow();
     }
 
     @Override
     public int reviewTotalTransfer(Long bankId) {
-        BankProject bankProject = bankProjectRepository.findById(bankId);
+        BankProject bankProject = bankProjectRepository.findById(bankId).orElseThrow();
         return bankProject.getTotalTransfer();
     }
 
     @Override
     public BigDecimal reviewBalance(Long bankId) {
-        AccountProject accountProject = accountProjectRepository.findById(bankId);
+        AccountProject accountProject = accountProjectRepository.findById(bankId).orElseThrow();
         return accountProject.getBalance();
     }
 
     @Override
     public void transferAmount(Long originAccount, Long destinyAccount, BigDecimal amount, Long bankId) {
 
-        AccountProject accountProjectOrigin = accountProjectRepository.findById(originAccount);
+        AccountProject accountProjectOrigin = accountProjectRepository.findById(originAccount).orElseThrow();
         debit(amount,accountProjectOrigin);
-        accountProjectRepository.update(accountProjectOrigin);
+        accountProjectRepository.save(accountProjectOrigin);
 
-        AccountProject accountProjectDestiny = accountProjectRepository.findById(destinyAccount);
+        AccountProject accountProjectDestiny = accountProjectRepository.findById(destinyAccount).orElseThrow();
         credit(amount,accountProjectDestiny);
-        accountProjectRepository.update(accountProjectDestiny);
+        accountProjectRepository.save(accountProjectDestiny);
 
-        BankProject bankProject = bankProjectRepository.findById(bankId);
+        BankProject bankProject = bankProjectRepository.findById(bankId).orElseThrow();
         int totalTransfers = bankProject.getTotalTransfer();
         bankProject.setTotalTransfer(++totalTransfers);
-        bankProjectRepository.update(bankProject);
+        bankProjectRepository.save(bankProject);
 
     }
 

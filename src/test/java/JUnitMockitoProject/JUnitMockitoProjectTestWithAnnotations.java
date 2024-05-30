@@ -88,9 +88,9 @@ public class JUnitMockitoProjectTestWithAnnotations {
         verify(accountProjectRepository,times(3)).findById(1L);
         verify(accountProjectRepository,times(3)).findById(2L);
 
-        verify(accountProjectRepository,times(2)).update(any(AccountProject.class));
+        verify(accountProjectRepository,times(2)).save(any(AccountProject.class));
         verify(bankProjectRepository,times(2)).findById(1L);
-        verify(bankProjectRepository).update(any(BankProject.class));
+        verify(bankProjectRepository).save(any(BankProject.class));
 
         verify(accountProjectRepository,never()).findAll();
         verify(accountProjectRepository,times(6)).findById(anyLong());
@@ -129,10 +129,10 @@ public class JUnitMockitoProjectTestWithAnnotations {
         // Comprobamos la cantidad de veces que se han llamado a los métodos
         verify(accountProjectRepository,times(3)).findById(1L);
         verify(bankProjectRepository,times(1)).findById(1L);
-        verify(accountProjectRepository,never()).update(any(AccountProject.class));
+        verify(accountProjectRepository,never()).save(any(AccountProject.class));
 
         verify(bankProjectRepository,times(1)).findById(1L);
-        verify(bankProjectRepository,never()).update(any(BankProject.class));
+        verify(bankProjectRepository,never()).save(any(BankProject.class));
         verify(accountProjectRepository,times(5)).findById(anyLong());
         verify(accountProjectRepository,never()).findAll();
     }

@@ -4,6 +4,7 @@ import JUnitMockitoProject.Entities.AccountProject;
 import JUnitMockitoProject.Entities.BankProject;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class DataAccountBank {
 /*    public static final AccountProject ACCOUNT_001 = AccountProject.builder()
@@ -24,27 +25,27 @@ public class DataAccountBank {
                                                             .build();*/
 
 
-    public static AccountProject createAccount_001(){
-        return  AccountProject.builder()
+    public static Optional<AccountProject> createAccount_001(){
+        return Optional.of( AccountProject.builder()
                 .id(1L)
                 .person("Irina")
                 .balance(new BigDecimal("1000"))
-                .build();
+                .build());
     }
 
-    public static AccountProject createAccount_002(){
-        return  AccountProject.builder()
+    public static Optional <AccountProject> createAccount_002(){
+        return Optional.of (AccountProject.builder()
                 .id(2L)
                 .person("Candela")
                 .balance(new BigDecimal("2000"))
-                .build();
+                .build());
     }
 
-    public static BankProject createBank_001(){
-        return  BankProject.builder()
+    public static Optional <BankProject> createBank_001(){
+        return Optional.of (BankProject.builder()
                 .id(1L)
                 .bankName("Financial Bank")
                 .totalTransfer(0)
-                .build();
+                .build());
     }
 }
