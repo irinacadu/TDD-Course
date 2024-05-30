@@ -1,5 +1,6 @@
 package JUnitMockitoProject.Entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,7 +9,13 @@ import lombok.*;
 @Setter
 @Builder
 @EqualsAndHashCode
+@Entity
+@Table(name="banks")
 public class BankProject {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String bankName;
