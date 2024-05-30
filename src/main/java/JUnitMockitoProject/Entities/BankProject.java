@@ -18,8 +18,10 @@ public class BankProject {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="bank_name")
     private String bankName;
 
+    @Column(name="total_transfer")
     private int totalTransfer;
 
 

@@ -20,8 +20,10 @@ public class AccountProject {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="person")
     private String person;
 
+    @Column(name="balance")
     private BigDecimal balance;
 
 
