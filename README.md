@@ -37,10 +37,18 @@
                   <artifactId>h2</artifactId>
                   <scope>test</scope>
                </dependency>
+
          <!-- JPA data starter-->
                <dependency>
                   <groupId>org.springframework.boot</groupId>
                   <artifactId>spring-boot-starter-data-jpa</artifactId>
+               </dependency>
+
+         <!-- Swagger -->
+               <dependency>
+                  <groupId>io.springfox</groupId>
+                  <artifactId>springfox-boot-starter</artifactId>
+                  <version>3.0.0</version>
                </dependency>
 
    ### Plugins:
@@ -55,6 +63,8 @@
 2. Para cada uno de los tests tenemos que **configurar el entorno**, ya que la propiedad ENVIRONMENT no existe lo haremos de la siguiente manera:
 - *Edit Configurations -> Environment variables -> ENVIRONMENT=DEV(o PROD)*
 - "Build and run" donde aparece la versión de java, en el campo VM options(lo sabremos poniendo el ratón encima) escribimos lo siguiente *-ea -DENV=dev* o  *-ea -DENV=prod*
+
+3. Configuración swagger
 
 
 
