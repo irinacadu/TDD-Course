@@ -24,13 +24,24 @@
                     <scope>test</scope>
                </dependency>
 
-           
         <!--Lombock-->        
                 <dependency>
                     <groupId>org.projectlombok</groupId>
                     <artifactId>lombok</artifactId>
                     <optional>true</optional>
                 </dependency>
+
+         <!-- Base de datos H2-->
+               <dependency>
+                  <groupId>com.h2database</groupId>
+                  <artifactId>h2</artifactId>
+                  <scope>test</scope>
+               </dependency>
+         <!-- JPA data starter-->
+               <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-data-jpa</artifactId>
+               </dependency>
 
    ### Plugins:
         <!--Pruebas en terminal-->
