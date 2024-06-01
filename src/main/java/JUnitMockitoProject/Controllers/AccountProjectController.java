@@ -13,8 +13,10 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequestMapping("/bank")
@@ -31,15 +33,26 @@ public class AccountProjectController {
 
 
     @GetMapping("/account-details-{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public AccountProject accountDetails(@PathVariable(name = "id") Long id){
-        return accountProjectService.findById(id);
+    public ResponseEntity<?> accountDetails(@PathVariable(name = "id") Long id){
+        AccountProject accountProject = null;
+        try{
+            accountProject= accountProjectService.findById(id);
+        }catch (NoSuchElementException exception){
+            return  ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(accountProject);
     }
 
     @PostMapping("/create-account")
     @ResponseStatus(CREATED)
     public AccountProject saveAccount(@RequestBody AccountProject accountProject){
         return accountProjectService.save(accountProject);
+    }
+
+    @DeleteMapping("/delete-account-{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteAccount(@PathVariable Long id){
+        accountProjectService.deleteById(id);
     }
 
     @PostMapping("/transfer")

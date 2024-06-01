@@ -125,7 +125,7 @@ class AccountProjectControllerWebClientTest {
     @DisplayName("Test 4: guardar cuenta con expectBody() y jsonPath()")
     void saveAccount_test() {
         //GIVEN
-        AccountProject accountMaria = new AccountProject(null,"Maria",new BigDecimal("3000"));
+        AccountProject accountMaria = new AccountProject(null, "Maria", new BigDecimal("3000"));
 
         //WHEN
         webTestClient.post().uri("/bank/create-account")
@@ -146,7 +146,7 @@ class AccountProjectControllerWebClientTest {
     @DisplayName("Test 5: guardar cuenta con consumeWith()")
     void saveAccount_consumeWith_test() {
         //GIVEN
-        AccountProject accountMario = new AccountProject(null,"Mario",new BigDecimal("3500"));
+        AccountProject accountMario = new AccountProject(null, "Mario", new BigDecimal("3500"));
 
         //WHEN
         webTestClient.post().uri("/bank/create-account")
@@ -157,13 +157,14 @@ class AccountProjectControllerWebClientTest {
                 .expectStatus().isCreated()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
                 .expectBody(AccountProject.class)
-                .consumeWith(response->{
-                    AccountProject accountProject =  response.getResponseBody();
-                    assertEquals(3L,accountProject.getId());
-                    assertEquals("Mario",accountProject.getPerson());
-                    assertEquals("3500.0",accountProject.getBalance().toPlainString());
+                .consumeWith(response -> {
+                    AccountProject accountProject = response.getResponseBody();
+                    assertEquals(3L, accountProject.getId());
+                    assertEquals("Mario", accountProject.getPerson());
+                    assertEquals("3500", accountProject.getBalance().toPlainString());
                 });
     }
+
     @Test
     @Order(6)
     @DisplayName("Test 6: listar cuentas con expectBody() y jsonPath()")
@@ -180,12 +181,12 @@ class AccountProjectControllerWebClientTest {
                 .jsonPath("$[1].id").isEqualTo(2L)
                 .jsonPath("$[1].balance").isEqualTo(2100)
                 .jsonPath("$").isArray()
-                .jsonPath("$").value(hasSize(4));
+                .jsonPath("$").value(hasSize(3));
     }
 
     @Test
     @Order(7)
-    @DisplayName("Test 6: listar cuentas con consumeWith()")
+    @DisplayName("Test 7: listar cuentas con consumeWith()")
     void accounts_consumeWith_test() {
         webTestClient.get().uri("/bank")
                 .exchange()
@@ -204,11 +205,30 @@ class AccountProjectControllerWebClientTest {
                 }).hasSize(2);
     }
 
+    @Test
+    @Order(8)
+    @DisplayName("Test 8: eliminar cuenta")
+    void delete_test() {
+        webTestClient.get().uri("/bank")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(AccountProject.class)
+                .hasSize(3);
+        webTestClient.delete().uri("/bank/delete-account-3")
+                .exchange()
+                .expectStatus().isNoContent()
+                .expectBody().isEmpty();
 
+        webTestClient.get().uri("/bank")
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBodyList(AccountProject.class)
+                .hasSize(2);
 
-
-
-
-
-
+        webTestClient.get().uri("/bank/account-details-3")
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody().isEmpty();
+    }
 }

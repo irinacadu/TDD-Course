@@ -47,6 +47,12 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     }
 
     @Override
+    @Transactional
+    public void deleteById(Long id) {
+        accountProjectRepository.deleteById(id);
+    }
+
+    @Override
     @Transactional()
     public int reviewTotalTransfer(Long bankId) {
         BankProject bankProject = bankProjectRepository.findById(bankId).orElseThrow();

@@ -16,6 +16,8 @@ public interface AccountProjectService {
     List<AccountProject> findAll();
 
     AccountProject save(AccountProject accountProject);
+
+    void deleteById(Long id);
     int reviewTotalTransfer(Long bankId);
 
     BigDecimal reviewBalance(Long bankId);
