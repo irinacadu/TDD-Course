@@ -73,8 +73,8 @@
 - *Edit Configurations -> Environment variables -> ENVIRONMENT=DEV(o PROD)*
 - "Build and run" donde aparece la versión de java, en el campo VM options(lo sabremos poniendo el ratón encima) escribimos lo siguiente *-ea -DENV=dev* o  *-ea -DENV=prod*
 
-3. [Configuración swagger] [Configuración swagger]
 
 
-[Configuración swagger]: https://github.com/irinacadu/TDD-Course/blob/a7d3ce9986dc0fae5b44a6fea9fe311e8d6904a9/src/main/java/JUnitMockitoProject/SwaggerConfig.java#L11
+
+
 
