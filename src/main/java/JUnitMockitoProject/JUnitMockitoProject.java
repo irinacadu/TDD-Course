@@ -1,13 +1,18 @@
 package JUnitMockitoProject;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JUnitMockitoProject {
+public class JUnitMockitoProject implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JUnitMockitoProject.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+
+	}
 }

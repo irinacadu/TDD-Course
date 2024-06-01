@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/acounts")
+@RequestMapping("/bank")
 public class AccountProjectController {
 
     @Autowired

@@ -45,11 +45,13 @@
                </dependency>
 
          <!-- Swagger -->
+         - Añadiendo esta dependencia y en la url : http://localhost:8080/swagger-ui/index.html accedemos a la documentación de la app
                <dependency>
-                  <groupId>io.springfox</groupId>
-                  <artifactId>springfox-boot-starter</artifactId>
-                  <version>3.0.0</version>
+                  <groupId>org.springdoc</groupId>
+                  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                  <version>2.5.0</version>
                </dependency>
+
 
    ### Plugins:
         <!--Pruebas en terminal-->
@@ -64,8 +66,8 @@
 - *Edit Configurations -> Environment variables -> ENVIRONMENT=DEV(o PROD)*
 - "Build and run" donde aparece la versión de java, en el campo VM options(lo sabremos poniendo el ratón encima) escribimos lo siguiente *-ea -DENV=dev* o  *-ea -DENV=prod*
 
-3. Configuración swagger
+3. [Configuración swagger] [Configuración swagger]
 
 
-
+[Configuración swagger]: https://github.com/irinacadu/TDD-Course/blob/a7d3ce9986dc0fae5b44a6fea9fe311e8d6904a9/src/main/java/JUnitMockitoProject/SwaggerConfig.java#L11
 

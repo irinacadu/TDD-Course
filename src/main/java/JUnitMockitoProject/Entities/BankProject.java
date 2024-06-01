@@ -21,7 +21,7 @@ public class BankProject {
     @Column(name="bank_name")
     private String bankName;
 
-    @Column(name="total_transfer")
+    @Column(name="total_transfers")
     private int totalTransfer;
 
 
