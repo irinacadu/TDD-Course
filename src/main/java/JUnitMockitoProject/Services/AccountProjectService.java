@@ -10,6 +10,7 @@ public interface AccountProjectService {
 
     AccountProject findById(Long id);
 
+    AccountProject findByPerson(String person);
     int reviewTotalTransfer(Long bankId);
 
     BigDecimal reviewBalance(Long bankId);

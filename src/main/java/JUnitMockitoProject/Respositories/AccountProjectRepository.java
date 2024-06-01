@@ -13,10 +13,4 @@ public interface AccountProjectRepository extends JpaRepository <AccountProject,
     @Query("select account from AccountProject account where account.person =?1")
     Optional<AccountProject> findByPerson(String person);
 
-
-
-//    List<AccountProject> findAll();
-//    AccountProject findById(Long id);
-//
-//    void update(AccountProject accountProject);
 }

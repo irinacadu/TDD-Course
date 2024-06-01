@@ -27,13 +27,11 @@ public class IntegrationJPATest {
 
     @Test
     void findByPerson_test() {
-        Optional<AccountProject> account = accountProjectRepository.findByPerson("Candela");
-//        assertThrows(NoSuchElementException.class, () -> {
-//            account.orElseThrow();
-//        });
-        assertTrue(account.isPresent());
-        assertEquals("Candela", account.orElseThrow().getPerson());
-//        assertEquals("1000", account.orElseThrow().getBalance());
+        Optional<AccountProject> account = accountProjectRepository.findByPerson("Maria");
+        assertThrows(NoSuchElementException.class, () -> {
+            account.orElseThrow();
+        });
+        assertFalse(account.isPresent());
     }
 
     @Test
@@ -60,7 +58,7 @@ public class IntegrationJPATest {
         //THEN
         assertEquals("Maria", account.getPerson());
         assertEquals("3000", account.getBalance().toPlainString());
-        assertEquals(3, account.getId());
+        assertEquals(4, account.getId());
 
     }
 

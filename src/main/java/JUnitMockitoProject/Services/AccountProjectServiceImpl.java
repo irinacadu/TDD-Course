@@ -30,6 +30,11 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     }
 
     @Override
+    public AccountProject findByPerson(String person) {
+        return accountProjectRepository.findByPerson(person).orElseThrow();
+    }
+
+    @Override
     @Transactional()
     public int reviewTotalTransfer(Long bankId) {
         BankProject bankProject = bankProjectRepository.findById(bankId).orElseThrow();
