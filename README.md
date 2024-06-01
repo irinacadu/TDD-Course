@@ -73,7 +73,7 @@
 - *Edit Configurations -> Environment variables -> ENVIRONMENT=DEV(o PROD)*
 - "Build and run" donde aparece la versión de java, en el campo VM options(lo sabremos poniendo el ratón encima) escribimos lo siguiente *-ea -DENV=dev* o  *-ea -DENV=prod*
 
-
+![Cerificado del curso](Apuntes/CertificadoCurso/certificado_pruebas_unitarias.jpg)
 
 
 
