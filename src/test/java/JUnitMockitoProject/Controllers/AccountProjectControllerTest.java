@@ -7,6 +7,7 @@ import JUnitMockitoProject.Services.AccountProjectService;
 import JUnitMockitoProject.Services.AccountProjectServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -36,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @WebMvcTest anotación que indica que esta clase va a testear el entorno web
  */
 @WebMvcTest(AccountProjectController.class)
+@Tag("integración_jpa")
 class AccountProjectControllerTest {
     ObjectMapper objectMapper;
     @Autowired

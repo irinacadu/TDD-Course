@@ -30,6 +30,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("integración_webClient")
 class AccountProjectControllerWebClientTest {
     ObjectMapper objectMapper;
     @Autowired

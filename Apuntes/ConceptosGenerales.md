@@ -19,7 +19,8 @@
 - Para poder testear en entornos concretos [Conditional examples test L14][conditional-examples-test-L14]
 - Podemos deshabilitar la traza de los logs pero solo en los test. Para eso en test crearemos un directorio resources donde crearemos un archivo [application.properties].
 - Si ejecutamos los test desde la carpeta raíz de *test -> botón derecho -> More Run/Debug -> "Run [...] with coverage"* podremos ver los porcentajes de cobertura de nuestros tests con respecto a nuestro proyecto.
-- 
+- Si tenemos varios test de integración pueden causar conflictos. Asi que solo podemos tener una prueba de integración y si hay varias tenemos que utilizar etiquetas para excluir a un grupo editándolas en la configuración.
+
 ## Tests unitarios 
 - Tenemos que tener en cuenta que por cada test se va a crear una instancia nueva es decir, el valor que utilicemos en el test solo funcionará para ese test.
 - Los tests unitarios prueban, solamente, si un método concreto funciona. No comprueba si es compatible con todas las demás.

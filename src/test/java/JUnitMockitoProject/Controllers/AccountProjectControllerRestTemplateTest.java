@@ -47,6 +47,7 @@ class AccountProjectControllerRestTemplateTest {
     @Test
     @Order(1)
     @DisplayName("TEST 1: transferencias")
+    @Tag("integración_restTemplate")
     void transfer_test() throws JsonProcessingException {
         //GIVEN
         TransactionProjectDTO transactionProjectDTO = new TransactionProjectDTO();
