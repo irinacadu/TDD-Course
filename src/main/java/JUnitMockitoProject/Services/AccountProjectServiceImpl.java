@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class AccountProjectServiceImpl implements AccountProjectService {
@@ -32,6 +33,17 @@ public class AccountProjectServiceImpl implements AccountProjectService {
     @Override
     public AccountProject findByPerson(String person) {
         return accountProjectRepository.findByPerson(person).orElseThrow();
+    }
+
+    @Override
+    public List<AccountProject> findAll() {
+      return  accountProjectRepository.findAll();
+    }
+
+    @Override
+    public AccountProject save(AccountProject accountProject) {
+
+        return accountProjectRepository.save(accountProject);
     }
 
     @Override

@@ -4,6 +4,7 @@ import JUnitMockitoProject.Entities.AccountProject;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public interface AccountProjectService {
@@ -11,6 +12,10 @@ public interface AccountProjectService {
     AccountProject findById(Long id);
 
     AccountProject findByPerson(String person);
+
+    List<AccountProject> findAll();
+
+    AccountProject save(AccountProject accountProject);
     int reviewTotalTransfer(Long bankId);
 
     BigDecimal reviewBalance(Long bankId);

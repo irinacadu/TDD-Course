@@ -51,6 +51,12 @@
                   <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                   <version>2.5.0</version>
                </dependency>
+         <!-- Webflux para pruebas de integración en entorno real -->
+               <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-webflux</artifactId>
+                  <scope>test</scope>
+               </dependency>
 
 
    ### Plugins:

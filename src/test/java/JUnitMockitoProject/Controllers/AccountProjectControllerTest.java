@@ -1,7 +1,10 @@
 package JUnitMockitoProject.Controllers;
 
+import JUnitMockitoProject.Entities.AccountProject;
 import JUnitMockitoProject.Entities.TransactionProjectDTO;
+import JUnitMockitoProject.Respositories.AccountProjectRepository;
 import JUnitMockitoProject.Services.AccountProjectService;
+import JUnitMockitoProject.Services.AccountProjectServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,17 +13,23 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static JUnitMockitoProject.Data.DataAccountBank.createAccount_001;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static JUnitMockitoProject.Data.DataAccountBank.createAccount_002;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -33,6 +42,9 @@ class AccountProjectControllerTest {
     private MockMvc mvc; //creación de objetos simulados del entorno web
     @MockBean
     private AccountProjectService accountProjectService;
+
+    @MockBean
+    private AccountProjectRepository accountProjectRepository;
 
     @BeforeEach
     void setUp() {
@@ -54,7 +66,7 @@ class AccountProjectControllerTest {
         when(accountProjectService.findById(1L)).thenReturn(createAccount_001().orElseThrow());
 
         //WHEN
-        mvc.perform(MockMvcRequestBuilders.get("/bank/account-details-1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/bank/account-details-1").contentType(MediaType.APPLICATION_JSON))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -97,7 +109,54 @@ class AccountProjectControllerTest {
                 .andExpect(jsonPath("$.mensaje").value("Transferencia realizada con éxito"))
                 .andExpect(jsonPath("$.transacción.originAccountId").value(transactionProjectDTO.getOriginAccountId()))
                 .andExpect(content().json(objectMapper.writeValueAsString(response)));
+    }
 
+    @Test
+    void findAll_test() throws Exception {
+        //GIVEN
+        List<AccountProject> accounts = Arrays.asList(createAccount_001().orElseThrow(),
+                createAccount_002().orElseThrow());
+
+        when(accountProjectService.findAll()).thenReturn(accounts);
+
+        //WHEN
+        mvc.perform(get("/bank").contentType(MediaType.APPLICATION_JSON))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].person").value("Irina"))
+                .andExpect(jsonPath("$[1].person").value("Candela"))
+                .andExpect(jsonPath("$[0].balance").value("1000"))
+                .andExpect(jsonPath("$[1].balance").value("2000"))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(content().json(objectMapper.writeValueAsString(accounts)));
+
+        verify(accountProjectService).findAll();
+
+    }
+
+    @Test
+    void save_test() throws Exception {
+        //GIVEN
+        AccountProject accountMaria = new AccountProject(null,"Maria",new BigDecimal("3000"));
+        when(accountProjectService.save(any())).then(invocation -> {
+            AccountProject accountProject = invocation.getArgument(0);
+            accountProject.setId(3L);
+            return accountProject;
+        });
+
+        //WHEN
+        mvc.perform(post("/bank/create-account").contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(accountMaria))
+                )
+
+                //THEN
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(jsonPath("$.person", is("Maria")))
+                .andExpect(jsonPath("$.balance").value("3000"));
+        verify(accountProjectService).save(any());
     }
 
 }
