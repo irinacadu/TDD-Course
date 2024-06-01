@@ -5,10 +5,7 @@ import JUnitMockitoProject.Entities.TransactionProjectDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -32,6 +29,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  * RANDOM_PORT levanta un puerto real
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AccountProjectControllerWebClientTest {
     ObjectMapper objectMapper;
     @Autowired
@@ -100,7 +98,7 @@ class AccountProjectControllerWebClientTest {
                 .expectBody()
                 .jsonPath("$.id").isEqualTo(1L)
                 .jsonPath("$.person").isEqualTo("Irina")
-                .jsonPath("$.balance").isEqualTo(1000);
+                .jsonPath("$.balance").isEqualTo(900);
     }
 
     @Test
@@ -138,7 +136,7 @@ class AccountProjectControllerWebClientTest {
                 .expectBody()
                 .jsonPath("$.person").isEqualTo("Maria")
                 .jsonPath("$.balance").isEqualTo(3000)
-                .jsonPath("$.id").isEqualTo(4);
+                .jsonPath("$.id").isEqualTo(3);
     }
 
     @Test
@@ -159,7 +157,7 @@ class AccountProjectControllerWebClientTest {
                 .expectBody(AccountProject.class)
                 .consumeWith(response -> {
                     AccountProject accountProject = response.getResponseBody();
-                    assertEquals(3L, accountProject.getId());
+                    assertEquals(4L, accountProject.getId());
                     assertEquals("Mario", accountProject.getPerson());
                     assertEquals("3500", accountProject.getBalance().toPlainString());
                 });
@@ -181,7 +179,7 @@ class AccountProjectControllerWebClientTest {
                 .jsonPath("$[1].id").isEqualTo(2L)
                 .jsonPath("$[1].balance").isEqualTo(2100)
                 .jsonPath("$").isArray()
-                .jsonPath("$").value(hasSize(3));
+                .jsonPath("$").value(hasSize(4));
     }
 
     @Test
@@ -195,14 +193,14 @@ class AccountProjectControllerWebClientTest {
                 .expectBodyList(AccountProject.class)
                 .consumeWith(response -> {
                     List<AccountProject> accounts = response.getResponseBody();
-                    assertEquals(2, accounts.size());
+                    assertEquals(4, accounts.size());
                     assertEquals(1L, accounts.get(0).getId());
                     assertEquals("Irina", accounts.get(0).getPerson());
                     assertEquals(900, accounts.get(0).getBalance().intValue());
                     assertEquals(2L, accounts.get(1).getId());
                     assertEquals("Candela", accounts.get(1).getPerson());
                     assertEquals("2100.00", accounts.get(1).getBalance().toPlainString());
-                }).hasSize(2);
+                }).hasSize(4);
     }
 
     @Test
@@ -213,7 +211,7 @@ class AccountProjectControllerWebClientTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(AccountProject.class)
-                .hasSize(3);
+                .hasSize(4);
         webTestClient.delete().uri("/bank/delete-account-3")
                 .exchange()
                 .expectStatus().isNoContent()
@@ -224,7 +222,7 @@ class AccountProjectControllerWebClientTest {
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
                 .expectBodyList(AccountProject.class)
-                .hasSize(2);
+                .hasSize(3);
 
         webTestClient.get().uri("/bank/account-details-3")
                 .exchange()
